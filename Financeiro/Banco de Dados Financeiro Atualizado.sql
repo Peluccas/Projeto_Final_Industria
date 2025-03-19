@@ -55,9 +55,7 @@ valor_liquido DECIMAL(10,2),
 status boolean,
 foreign key (fk_setor) references setores(id_setores));
 
------------------------------------------------------------------------------------------
-true - concluida
-false - pendente
+
 
 INSERT INTO setores (nome_setor) VALUES
 ('RH'),
