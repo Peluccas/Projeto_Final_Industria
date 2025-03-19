@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="1352.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AutomacaoController">
+  <tabs>
+    <Tab text="Automação RH">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="628.0" prefWidth="1087.0">
+               <children>
+                  <Label layoutX="11.0" layoutY="56.0" text="Nome da Automação" />
+                  <TextField fx:id="txtNomeDaAutomacao" layoutX="8.0" layoutY="75.0" promptText="Nome" />
+                  <Label layoutX="8.0" layoutY="108.0" text="Responável" />
+                  <TextField fx:id="txtResponsavel" layoutX="8.0" layoutY="127.0" promptText="Responsável" />
+                  <Label layoutX="8.0" layoutY="158.0" text="Categoria" />
+                  <Label layoutX="8.0" layoutY="209.0" text="Setor" />
+                  <TextField fx:id="txtSetor" layoutX="7.0" layoutY="228.0" promptText="Setor" />
+                  <Button fx:id="btnSave" alignment="CENTER" layoutX="70.0" layoutY="558.0" mnemonicParsing="false" onAction="#salvarAutomacaoRH" prefHeight="37.0" prefWidth="77.0" style="-fx-border-color: green;" text="Save">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@iconSave.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <ComboBox fx:id="cmbCategoria" layoutX="7.0" layoutY="176.0" prefWidth="150.0" />
+                  <TextArea fx:id="txtDescricao" layoutX="178.0" layoutY="72.0" prefHeight="18.0" prefWidth="200.0" promptText="Descrição" />
+                  <Label layoutX="177.0" layoutY="48.0" text="Descrição" />
+                  <Label layoutX="186.0" layoutY="118.0" text="Situação" />
+                  <ComboBox fx:id="cmbSituacao" layoutX="179.0" layoutY="138.0" prefWidth="150.0" />
+                  <Label layoutX="183.0" layoutY="168.0" text="Operação" />
+                  <TextField fx:id="txtOperacao" layoutX="180.0" layoutY="191.0" promptText="Operação" />
+                  <Label layoutX="180.0" layoutY="226.0" text="Observação" />
+                  <TextArea fx:id="txtObservacao" layoutX="180.0" layoutY="252.0" prefHeight="38.0" prefWidth="211.0" promptText="Observação" />
+                  <Label layoutX="8.0" layoutY="262.0" text="Prioridade" />
+                  <ComboBox fx:id="cmbPrioridade" layoutX="8.0" layoutY="290.0" prefWidth="150.0" />
+                  <Label layoutX="9.0" layoutY="322.0" text="Localização" />
+                  <TextField fx:id="txtLocalizacao" layoutX="7.0" layoutY="342.0" promptText="Localização" />
+                  <Button alignment="CENTER" layoutX="186.0" layoutY="554.0" mnemonicParsing="false" onAction="#deleteArh" prefHeight="37.0" prefWidth="91.0" style="-fx-border-color: red;" text="Excluir">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@iconRemover.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="133.0" layoutY="495.0" mnemonicParsing="false" onAction="#atualizarAutomacao" prefHeight="34.0" prefWidth="96.0" style="-fx-border-color: yellow;" text="Atualizar">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Atualizar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Vizualizar Dados">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tablesAutomacaoRH" layoutX="158.0" layoutY="229.0" prefHeight="385.0" prefWidth="1099.0">
+                    <columns>
+                      <TableColumn fx:id="colId" prefWidth="49.0" text="Id" />
+                        <TableColumn fx:id="colNomeAutomacao" prefWidth="92.0" text="Nome" />
+                        <TableColumn fx:id="colResponsavel" prefWidth="100.0" text="Responsável" />
+                        <TableColumn fx:id="colCategoria" prefWidth="71.0" text="Categoria" />
+                        <TableColumn fx:id="colSetor" prefWidth="74.0" text="Setor" />
+                        <TableColumn fx:id="colDescricao" prefWidth="119.0" text="Descrição" />
+                        <TableColumn fx:id="colSituacao" prefWidth="76.0" text="Situação" />
+                        <TableColumn fx:id="colLocalizacao" prefWidth="70.0" text="Localização" />
+                        <TableColumn fx:id="colOperacao" prefWidth="75.0" text="Operação" />
+                        <TableColumn fx:id="colPrioridade" text="Prioridade" />
+                        <TableColumn fx:id="colObservacao" prefWidth="144.0" text="Observação" />
+                    </columns>
+                  </TableView>
+                  <TextField fx:id="filtroNomeAut" layoutX="317.0" layoutY="58.0" promptText="Filtrar por automação" />
+                  <TextField fx:id="filtroResponsavelAut" layoutX="722.0" layoutY="58.0" promptText="Filtrar por Responsável" />
+                  <TextField fx:id="filtroSetorAut" layoutX="511.0" layoutY="90.0" promptText="Filtrar por Setor" />
+                  <TextField fx:id="filtroOperacaoAut" layoutX="722.0" layoutY="121.0" promptText="Filtrar por operação" />
+                  <TextField fx:id="filtroLocalizacaoAut" layoutX="317.0" layoutY="121.0" promptText="Filtrar por localização" />
+                  <Button fx:id="btnLimparFiltro" alignment="CENTER" layoutX="586.0" layoutY="181.0" mnemonicParsing="false" onAction="#limparFiltro" prefHeight="27.0" prefWidth="121.0" style="-fx-border-color: red;" text="Limpar Filtro">
+                     <graphic>
+                        <ImageView fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@iconRemover.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnFiltrar" alignment="CENTER" layoutX="451.0" layoutY="181.0" mnemonicParsing="false" onAction="#filtrarAutomacao" prefHeight="27.0" prefWidth="102.0" style="-fx-border-color: yellow;" text="Filtrar">
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Filtrar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+    </tabs>
+</TabPane>
