@@ -39,7 +39,7 @@ public class PagFuncionariosController {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM pagfuncionarios")) {
                    while (rs.next()) {
-                       listaFuncionarios.add(new PagFuncionarios(rs.getInt("id"), rs.getInt("fk_funcionarios"), rs.getInt("fk_setor"), rs.getString("data_pagto"), rs.getDouble("salario_base"), rs.getDouble("descontos"), rs.getDouble("valor_liquido"), rs.getBoolean("status")));
+                       listaFuncionarios.add(new PagFuncionarios(rs.getInt("id_pagfuncionarios"), rs.getInt("fk_funcionarios"), rs.getInt("fk_setor"), rs.getString("data_pagto"), rs.getDouble("salario_base"), rs.getDouble("descontos"), rs.getDouble("valor_liquido"), rs.getBoolean("status")));
                    }
                    tablePagamento.setItems(listaFuncionarios);  
            }catch (SQLException e){

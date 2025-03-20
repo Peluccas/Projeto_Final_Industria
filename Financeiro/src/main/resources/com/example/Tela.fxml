@@ -11,27 +11,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="1142.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="1142.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.FluxoController">
   <tabs>
     <Tab fx:id="tabFluxo" text="Gestão de Caixa">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="470.0" prefWidth="774.0">
                <children>
-                  <TableView layoutX="294.0" layoutY="106.0" prefHeight="496.0" prefWidth="813.0">
+                  <TableView fx:id="tableFluxo" layoutX="294.0" layoutY="106.0" prefHeight="496.0" prefWidth="813.0">
                      <columns>
                         <TableColumn fx:id="colFluData" prefWidth="116.0" text="Data Transação" />
                         <TableColumn fx:id="colFluSetor" prefWidth="78.0" text="Setor" />
                         <TableColumn fx:id="colFluDescricao" prefWidth="176.0" text="Descrição" />
                         <TableColumn fx:id="colFluValor" prefWidth="61.0" text="Valor" />
                         <TableColumn fx:id="colFluCategoria" prefWidth="72.0" text="Categoria" />
-                        <TableColumn fx:id="colFluForma" prefWidth="122.0" text="Forma Pagamento" />
+                        <TableColumn fx:id="colFluPagto" prefWidth="122.0" text="Forma Pagamento" />
                         <TableColumn fx:id="colFluVencimento" prefWidth="91.0" text="Vencimento" />
                         <TableColumn fx:id="colFluStatus" prefWidth="96.0" text="Status" />
                      </columns>
                   </TableView>
-                  <Button layoutX="25.0" layoutY="577.0" mnemonicParsing="false" text="Adicionar" />
+                  <Button layoutX="25.0" layoutY="577.0" mnemonicParsing="false" onAction="#adicionarFluxo" text="Adicionar" />
                   <Button layoutX="123.0" layoutY="577.0" mnemonicParsing="false" text="Editar" />
-                  <Button layoutX="205.0" layoutY="577.0" mnemonicParsing="false" text="Excluir" />
+                  <Button layoutX="205.0" layoutY="577.0" mnemonicParsing="false" onAction="#excluirFluxo" text="Excluir" />
                   <TextField fx:id="txtData" layoutX="119.0" layoutY="147.0" prefHeight="25.0" prefWidth="103.0" promptText="Data Transação" />
                   <Label layoutX="32.0" layoutY="151.0" text="Data Transação:" />
                   <Label layoutX="77.0" layoutY="196.0" text="Setor:" />
@@ -53,7 +53,7 @@
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnLimpar" layoutX="108.0" layoutY="628.0" mnemonicParsing="false" text="Limpar Campos" />
+                  <Button layoutX="108.0" layoutY="628.0" mnemonicParsing="false" onAction="#limparCampos" text="Limpar Campos" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -72,8 +72,8 @@
                         <TableColumn fx:id="colSoStatus" prefWidth="134.0" text="Status" />
                      </columns>
                   </TableView>
-                  <Button fx:id="btnAceitar" layoutX="499.0" layoutY="623.0" mnemonicParsing="false" text="Aceitar" />
-                  <Button fx:id="btnRecusar" layoutX="594.0" layoutY="623.0" mnemonicParsing="false" text="Recusar" />
+                  <Button layoutX="499.0" layoutY="623.0" mnemonicParsing="false" onAction="#aceitar" text="Aceitar" />
+                  <Button layoutX="594.0" layoutY="623.0" mnemonicParsing="false" onAction="#recusar" text="Recusar" />
                   <Label layoutX="378.0" layoutY="29.0" prefHeight="47.0" prefWidth="380.0" text="Solicitações de Orçamento">
                      <font>
                         <Font size="32.0" />
@@ -91,11 +91,11 @@
                      <columns>
                         <TableColumn fx:id="colPagFuncionario" prefWidth="110.0" text="Funcionário" />
                         <TableColumn fx:id="colPagSetor" prefWidth="82.0" text="Setor" />
-                        <TableColumn fx:id="colPagData" prefWidth="106.0" text="Data Pagamento" />
-                        <TableColumn fx:id="colPagSalario" prefWidth="114.0" text="Salário Base" />
-                        <TableColumn fx:id="colPagDescontos" prefWidth="91.0" text="Descontos" />
-                        <TableColumn fx:id="colPagLiquido" prefWidth="97.0" text="Valor Líquido" />
-                        <TableColumn fx:id="colPagStatus" prefWidth="100.0" text="Status" />
+                        <TableColumn fx:id="colPagData" prefWidth="132.0" text="Data Pagamento" />
+                        <TableColumn fx:id="colPagSalario" prefWidth="147.0" text="Salário Base" />
+                        <TableColumn fx:id="colPagDescontos" prefWidth="106.0" text="Descontos" />
+                        <TableColumn fx:id="colPagLiquido" prefWidth="116.0" text="Valor Líquido" />
+                        <TableColumn fx:id="colPagStatus" prefWidth="99.0" text="Status" />
                      </columns>
                   </TableView>
                   <ChoiceBox fx:id="cmbFiltroStatus" layoutX="123.0" layoutY="267.0" prefWidth="150.0" />
@@ -118,16 +118,16 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="268.0" layoutY="97.0" prefHeight="539.0" prefWidth="800.0">
+                  <TableView fx:id="tableRelatorio" layoutX="268.0" layoutY="97.0" prefHeight="539.0" prefWidth="800.0">
                      <columns>
                         <TableColumn fx:id="colReData" prefWidth="96.0" text="Data Transação" />
-                        <TableColumn fx:id="colReSetor" prefWidth="77.0" text="Setor" />
-                        <TableColumn fx:id="colReDescricao" prefWidth="96.0" text="Descrição" />
-                        <TableColumn fx:id="colReValor" prefWidth="72.0" text="Valor" />
-                        <TableColumn fx:id="colReCategoria" prefWidth="69.0" text="Categoria" />
-                        <TableColumn fx:id="colReForma" prefWidth="113.0" text="Forma Pagamento" />
-                        <TableColumn fx:id="colReVencimento" prefWidth="79.0" text="Vencimento" />
-                        <TableColumn fx:id="colReStatus" prefWidth="78.0" text="Status" />
+                        <TableColumn fx:id="colReSetor" prefWidth="82.0" text="Setor" />
+                        <TableColumn fx:id="colReDescricao" prefWidth="125.0" text="Descrição" />
+                        <TableColumn fx:id="colReValor" prefWidth="69.0" text="Valor" />
+                        <TableColumn fx:id="colReCategoria" prefWidth="100.0" text="Categoria" />
+                        <TableColumn fx:id="colReForma" prefWidth="125.0" text="Forma Pagamento" />
+                        <TableColumn fx:id="colReVencimento" prefWidth="106.0" text="Vencimento" />
+                        <TableColumn fx:id="colReStatus" prefWidth="96.0" text="Status" />
                      </columns>
                   </TableView>
                   <Label layoutX="39.0" layoutY="163.0" text="Data:" />

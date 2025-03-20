@@ -35,7 +35,7 @@ public class SolicitacoesController {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM solicitacoes")) {
                 while (rs.next()) {
-                    listaSolicitacoes.add(new Solicitacoes(rs.getInt("id"), rs.getString("data_solicitacao"), rs.getInt("fk_setor"), rs.getString("descricao"), rs.getString("quantidade"), rs.getDouble("valor"), rs.getString("prazo"), rs.getString("status")));
+                    listaSolicitacoes.add(new Solicitacoes(rs.getInt("id_solicitacoes"), rs.getString("data_solicitacao"), rs.getInt("fk_setor"), rs.getString("descricao"), rs.getString("quantidade"), rs.getDouble("valor"), rs.getString("prazo"), rs.getString("status")));
                 }
                 tableSolicitacoes.setItems(listaSolicitacoes);  
         }catch (SQLException e){

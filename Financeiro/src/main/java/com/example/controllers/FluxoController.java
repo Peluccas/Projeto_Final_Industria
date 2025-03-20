@@ -57,6 +57,18 @@ public class FluxoController {
     @FXML private TableColumn<PagFuncionarios, Double> colPagLiquido;
     @FXML private TableColumn<PagFuncionarios, Boolean> colPagStatus;
 
+
+    //Tabela Relatorio
+    @FXML private TableView<Fluxo> tableRelatorio;
+    @FXML private TableColumn<Fluxo, String> colReData;
+    @FXML private TableColumn<Fluxo, String> colReSetor;
+    @FXML private TableColumn<Fluxo, String> colReDescricao;
+    @FXML private TableColumn<Fluxo, Double> colReValor;
+    @FXML private TableColumn<Fluxo, String> colReCategoria;
+    @FXML private TableColumn<Fluxo, Double> colReForma;
+    @FXML private TableColumn<Fluxo, String> colReVencimento;
+    @FXML private TableColumn<Fluxo, String> colReStatus;
+
     //Campos para atualização
     @FXML private TextField txtDataAtualizar;
     @FXML private ChoiceBox<String> cmbSetorAtualizar;
@@ -88,42 +100,68 @@ public class FluxoController {
         private ObservableList<Fluxo> listaFluxo = FXCollections.observableArrayList();
         private ObservableList<Solicitacoes> listaSolicitacoes = FXCollections.observableArrayList();
         private ObservableList<PagFuncionarios> listaFuncionarios = FXCollections.observableArrayList();
+        private ObservableList<Fluxo> listaRelatorio = FXCollections.observableArrayList();
 
-    @FXML
-    private void adicionarFluxo() {
-        String data = String.valueOf(txtData.getText());
-        String descricao = txtDescricao.getText();
-        double valor = Double.parseDouble(txtValor.getText());
-        String vencimento = String.valueOf(txtVencimento.getText()); 
-        String status = String.valueOf(cmbStatusAtualizar.getValue());
-        Boolean status_validado;
+        @FXML
+        private void adicionarFluxo() {
+            String data = String.valueOf(txtData.getText());
+            String setor = String.valueOf(cmbSetor.getValue());
+            String descricao = txtDescricao.getText();
+            double valor = Double.parseDouble(txtValor.getText());
+            String vencimento = String.valueOf(txtVencimento.getText()); 
+            String status = String.valueOf(cmbStatus.getValue());
+            Boolean status_validado;
+            Integer setor_validado = null;
 
-        if("Concluida".equals(status)){
-            status_validado = true;           
-        }else{
-            status_validado = false;
-        }
-
-
-        try (Connection conn = Database.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO fluxo (data_transacao, fk_setor, descricao, valor, categoria, forma_pagto, vencimento, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
-           
-            stmt.setString(1, data);
-            stmt.setString(2, cmbSetor.getValue());
-            stmt.setString(3,descricao);
-            stmt.setDouble(4, valor);
-            stmt.setString(5, cmbCategoria.getValue());
-            stmt.setString(6, cmbPagto.getValue());
-            stmt.setString(7, vencimento);
-            stmt.setBoolean(8, status_validado);
-            stmt.executeUpdate();
-
-            listaFluxo();
+            if("Concluida".equals(status)){
+                status_validado = true;           
+            }else{
+                status_validado = false;
+            }
+                   
+              
+            if ("RH".equals(setor)) {
+                setor_validado = 1;
+            } else if ("AUTOMAÇÃO".equals(setor)) {
+                setor_validado = 2;
+            } else if ("PRODUÇÃO".equals(setor)) {
+                setor_validado = 3;
+            } else if ("ESTOQUE".equals(setor)) {
+                setor_validado = 4;
+            } else if ("CONTROLE DE QUALIDADE".equals(setor)) {
+                setor_validado = 5;
+            } else if ("FINANCEIRO".equals(setor)) {
+                setor_validado = 6;
+            }
+        
+        
+            if (setor_validado == null) {
+                System.out.println("Erro: setor não selecionado ou inválido!");
+                return; 
+            }
+        
+            
+            try (Connection conn = Database.getConnection();
+                 PreparedStatement stmt = conn.prepareStatement("INSERT INTO fluxo (data_transacao, fk_setor, descricao, valor, categoria, forma_pagto, vencimento, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
                 
-        }catch (SQLException e){
-            e.printStackTrace();
+                stmt.setString(1, data);
+                stmt.setInt(2, setor_validado);
+                stmt.setString(3, descricao);
+                stmt.setDouble(4, valor);
+                stmt.setString(5, cmbCategoria.getValue());
+                stmt.setString(6, cmbPagto.getValue());
+                stmt.setString(7, vencimento);
+                stmt.setBoolean(8, status_validado);
+                
+                stmt.executeUpdate();
+        
+                listaFluxo(); 
+        
+            } catch (SQLException e) {
+                e.printStackTrace(); 
+            }
         }
-    }
+        
 
     @FXML
     private void atualizarFluxo() {
@@ -181,13 +219,47 @@ public class FluxoController {
     @FXML
     private void listaFluxo(){
         listaFluxo.clear();
+        
         try (Connection conn = Database.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM fluxo")) {
                 while (rs.next()) {
-                    listaFluxo.add(new Fluxo(rs.getInt("id"), rs.getString("data_transacao"), rs.getInt("fk_setor"), rs.getString("descricao"), rs.getDouble("valor"), rs.getString("categoria"), rs.getString("forma_pagto"), rs.getString("vencimento"), rs.getBoolean("status")));
+                    listaFluxo.add(new 
+                    Fluxo(rs.getInt("id_fluxo"), 
+                    rs.getString("data_transacao"), 
+                    rs.getInt("fk_setor"), 
+                    rs.getString("descricao"), 
+                    rs.getDouble("valor"), 
+                    rs.getString("categoria"), 
+                    rs.getString("forma_pagto"), 
+                    rs.getString("vencimento"), 
+                    rs.getBoolean("status")));
                 }
                 tableFluxo.setItems(listaFluxo);  
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void listaRelatorio(){
+        listaRelatorio.clear();
+        try (Connection conn = Database.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM fluxo")) {
+                while (rs.next()) {
+                    listaRelatorio.add(new 
+                    Fluxo(rs.getInt("id_fluxo"),
+                     rs.getString("data_transacao"),
+                      rs.getInt("fk_setor"),
+                       rs.getString("descricao"), 
+                       rs.getDouble("valor"), 
+                       rs.getString("categoria"), 
+                       rs.getString("forma_pagto"),
+                        rs.getString("vencimento"), 
+                        rs.getBoolean("status")));
+                }
+                tableRelatorio.setItems(listaRelatorio);  
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -227,6 +299,7 @@ public class FluxoController {
 
     @FXML
     public void initialize() {
+        //Inicializacao Fluxo
         colFluData.setCellValueFactory(new PropertyValueFactory<>("data_transacao"));
         colFluSetor.setCellValueFactory(new PropertyValueFactory<>("fk_setor"));
         colFluDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
@@ -234,7 +307,7 @@ public class FluxoController {
         colFluCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
         colFluPagto.setCellValueFactory(new PropertyValueFactory<>("forma_pagto"));
         colFluVencimento.setCellValueFactory(new PropertyValueFactory<>("vencimento"));
-        colFluStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colFluStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
 
         //Inicialização Solicitações
         colSoData.setCellValueFactory(new PropertyValueFactory<>("data_solicitacao"));
@@ -254,7 +327,20 @@ public class FluxoController {
         colPagLiquido.setCellValueFactory(new PropertyValueFactory<>("valor_liquido"));
         colPagStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        cmbFiltroSetor.getItems().addAll("RH", "Automação", "Produção", "Estoque", "Controle de Qualidade");
+        //Inicialização Relatorio
+        colReData.setCellValueFactory(new PropertyValueFactory<>("data_transacao"));
+        colReSetor.setCellValueFactory(new PropertyValueFactory<>("fk_setor"));
+        colReDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        colReValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
+        colReCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        colReForma.setCellValueFactory(new PropertyValueFactory<>("forma_pagto"));
+        colReVencimento.setCellValueFactory(new PropertyValueFactory<>("vencimento"));
+        colReStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
+
+       
+
+
+        cmbFiltroSetor.getItems().addAll("RH", "Automação", "Produção", "Estoque", "Controle de Qualidade", "Financeiro");
         cmbFiltroData.getItems().addAll("2020", "2021", "2022", "2023", "2024","2025");
         cmbFiltroStatus.getItems().addAll("Concluida", "Pendente");
 
@@ -263,7 +349,7 @@ public class FluxoController {
         
         listaSolicitacoes();
 
-
+        listaRelatorio();
 
         cmbSetor.getItems().addAll("RH", "Automação", "Produção", "Estoque", "Controle de Qualidade");
         cmbCategoria.getItems().addAll("Compra","Venda", "Serviço");
@@ -281,7 +367,15 @@ public class FluxoController {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM solicitacoes")) {
                    while (rs.next()) {
-                       listaSolicitacoes.add(new Solicitacoes(rs.getInt("id"), rs.getString("data_solicitacao"), rs.getInt("fk_setor"), rs.getString("descricao"), rs.getString("quantidade"), rs.getDouble("valor"), rs.getString("prazo"), rs.getString("status")));
+                       listaSolicitacoes.add(new
+                        Solicitacoes(rs.getInt("id_solicitacoes"), 
+                        rs.getString("data_solicitacao"), 
+                        rs.getInt("fk_setor"), 
+                        rs.getString("descricao"), 
+                        rs.getString("quantidade"), 
+                        rs.getDouble("valor"), 
+                        rs.getString("prazo"), 
+                        rs.getString("status")));
                    }
                    tableSolicitacoes.setItems(listaSolicitacoes);  
            }catch (SQLException e){
@@ -324,7 +418,16 @@ public class FluxoController {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM pagfuncionarios")) {
                    while (rs.next()) {
-                       listaFuncionarios.add(new PagFuncionarios(rs.getInt("id"), rs.getInt("fk_funcionarios"), rs.getInt("fk_setor"), rs.getString("data_pagto"), rs.getDouble("salario_base"), rs.getDouble("descontos"), rs.getDouble("valor_liquido"), rs.getBoolean("status")));
+                       listaFuncionarios.add(new 
+                       PagFuncionarios(
+                        rs.getInt("id_pagfuncionarios"), 
+                       rs.getInt("fk_funcionarios"), 
+                       rs.getInt("fk_setor"),
+                       rs.getString("data_pagto"), 
+                       rs.getDouble("salario_base"), 
+                       rs.getDouble("descontos"),
+                       rs.getDouble("valor_liquido"),
+                       rs.getBoolean("status")));
                    }
                    tablePagamento.setItems(listaFuncionarios);  
            }catch (SQLException e){
