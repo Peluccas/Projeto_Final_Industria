@@ -5,6 +5,7 @@ import com.example.models.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -71,13 +72,13 @@ public class FluxoController {
 
     //Campos para atualização
     @FXML private TextField txtDataAtualizar;
-    @FXML private ChoiceBox<String> cmbSetorAtualizar;
+    @FXML private ComboBox<String> cmbSetorAtualizar;
     @FXML private TextField txtDescricaoAtualizar;
     @FXML private TextField txtValorAtualizar;
     @FXML private ChoiceBox<String> cmbCategoriaAtualizar;
     @FXML private ChoiceBox<String> cmbPagtoAtualizar;
     @FXML private TextField txtVencimentoAtualizar; 
-    @FXML private ChoiceBox<String> cmbStatusAtualizar;
+    @FXML private ComboBox<String> cmbStatusAtualizar;
 
     //import dos filtros
     @FXML private TextField filtroData;
@@ -94,6 +95,7 @@ public class FluxoController {
     @FXML private Tab tabSolicitacoes;
     @FXML private Tab tabPagFuncionarios;
     @FXML private Tab tabRelatorio;
+    @FXML private Tab tabAtualizar;
 
 
     
@@ -166,11 +168,14 @@ public class FluxoController {
     @FXML
     private void atualizarFluxo() {
         String data = String.valueOf(txtDataAtualizar.getText());
+        String setor = String.valueOf(cmbSetorAtualizar.getValue());
         String descricao = txtDescricaoAtualizar.getText();
         double valor = Double.parseDouble(txtValorAtualizar.getText());
         String vencimento = String.valueOf(txtVencimentoAtualizar.getText());
         String status = String.valueOf(cmbStatusAtualizar.getValue());
         Boolean status_validado;
+        Integer setor_validado = null;
+        Fluxo fluxoSelecionado = tableFluxo.getSelectionModel().getSelectedItem();
 
         if("Concluida".equals(status)){
             status_validado = true;           
@@ -178,8 +183,10 @@ public class FluxoController {
             status_validado = false;
         }
 
+     
+
         try (Connection conn = Database.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("UPDATE fluxo SET data_transacao = ?, fk_setor = ?, descricao = ?, valor = ?, categoria = ?, forma_pagto = ?, vencimento = ?, status = ? WHERE id = ?")) {
+        PreparedStatement stmt = conn.prepareStatement("UPDATE fluxo SET data_transacao = ?, fk_setor = ?, descricao = ?, valor = ?, categoria = ?, forma_pagto = ?, vencimento = ?, status = ? WHERE id_fluxo = ?")) {
         
             stmt.setString(1, data);
             stmt.setString(2, cmbSetorAtualizar.getValue());
@@ -189,8 +196,11 @@ public class FluxoController {
             stmt.setString(6, cmbPagtoAtualizar.getValue());
             stmt.setString(7, vencimento);
             stmt.setBoolean(8, status_validado);
+            stmt.setInt(9, fluxoSelecionado.getId());
 
             listaFluxo();
+            tabPane.getSelectionModel().select(tabFluxo);
+
 
         } catch (SQLException e){
             e.printStackTrace();
@@ -202,12 +212,13 @@ public class FluxoController {
        Fluxo fluxoSelecionado = tableFluxo.getSelectionModel().getSelectedItem();
        if (fluxoSelecionado != null){
           try(Connection conn = Database.getConnection();
-          PreparedStatement stmt = conn.prepareStatement("DELETE FROM fluxo WHERE id = ?")) { 
+          PreparedStatement stmt = conn.prepareStatement("DELETE FROM fluxo WHERE id_fluxo = ?")) { 
 
             stmt.setInt(1, fluxoSelecionado.getId());
             stmt.executeUpdate();
 
             listaFluxo();
+            tabPane.getSelectionModel().select(tabFluxo);
 
          } catch (SQLException e){
           e.printStackTrace();
@@ -222,7 +233,7 @@ public class FluxoController {
         
         try (Connection conn = Database.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM fluxo")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM FLUXO")) {
                 while (rs.next()) {
                     listaFluxo.add(new 
                     Fluxo(rs.getInt("id_fluxo"), 
@@ -265,34 +276,34 @@ public class FluxoController {
         }
     }
 
-    /* 
+    
      private void preencherCamposAtualizacao() {
         Fluxo fluxoSelecionado = tableFluxo.getSelectionModel().getSelectedItem();
         if (fluxoSelecionado != null){
-            txtDataAtualizar.setText(ValueOf(fluxoSelecionado.getData_transacao()));
-            cmbSetorAtualizar.setValue(fluxoSelecionado.getFk_setor());
+            txtDataAtualizar.setText(fluxoSelecionado.getData_transacao());
+            cmbSetorAtualizar.setValue(String.valueOf(fluxoSelecionado.getFk_setor()));
             txtDescricaoAtualizar.setText(fluxoSelecionado.getDescricao());
             txtValorAtualizar.setText(String.valueOf(fluxoSelecionado.getValor()));
             cmbCategoriaAtualizar.setValue(fluxoSelecionado.getCategoria());
             cmbPagtoAtualizar.setValue(fluxoSelecionado.getForma_pagto());
-            txtVencimentoAtualizar.setText(valueOf(fluxoSelecionado.getVencimento()));
-            cmbStatusAtualizar.setValue(valueOf(fluxoSelecionado.getStatus()));
+            txtVencimentoAtualizar.setText((fluxoSelecionado.getVencimento()));
+            cmbStatusAtualizar.setValue(String.valueOf(fluxoSelecionado.getStatus()));
              
-         tabFluxo.getSelectionModel().select(tabFluxo);
+         tabPane.getSelectionModel().select(tabAtualizar);
 
         }
     }
-     */
+    
 
     public void limparCampos() {
-        txtDataAtualizar.clear();
-        cmbSetorAtualizar.setValue(null);
-        txtDescricaoAtualizar.clear();
-        txtValorAtualizar.clear();
-        cmbCategoriaAtualizar.setValue(null);
-        cmbPagtoAtualizar.setValue(null);
-        txtVencimentoAtualizar.clear();
-        cmbStatusAtualizar.setValue(null);
+        txtData.clear();
+        cmbSetor.setValue(null);
+        txtDescricao.clear();
+        txtValor.clear();
+        cmbCategoria.setValue(null);
+        cmbPagto.setValue(null);
+        txtVencimento.clear();
+        cmbStatus.setValue(null);
     }
 
 
@@ -309,6 +320,12 @@ public class FluxoController {
         colFluVencimento.setCellValueFactory(new PropertyValueFactory<>("vencimento"));
         colFluStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
 
+        tableFluxo.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getClickCount() > 1) {
+                preencherCamposAtualizacao();
+            }
+        });
+
         //Inicialização Solicitações
         colSoData.setCellValueFactory(new PropertyValueFactory<>("data_solicitacao"));
         colSoSetor.setCellValueFactory(new PropertyValueFactory<>("fk_setor"));
@@ -317,6 +334,12 @@ public class FluxoController {
         colSoValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
         colSoPrazo.setCellValueFactory(new PropertyValueFactory<>("prazo"));
         colSoStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        tableSolicitacoes.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getClickCount() > 1) {
+                listaSolicitacoes();
+            }
+        });
 
         //Inicialização Pagamentos
         colPagFuncionario.setCellValueFactory(new PropertyValueFactory<>("fk_funcionarios"));
@@ -340,9 +363,6 @@ public class FluxoController {
        
 
 
-        cmbFiltroSetor.getItems().addAll("RH", "Automação", "Produção", "Estoque", "Controle de Qualidade", "Financeiro");
-        cmbFiltroData.getItems().addAll("2020", "2021", "2022", "2023", "2024","2025");
-        cmbFiltroStatus.getItems().addAll("Concluida", "Pendente");
 
         listaFuncionarios();
 
@@ -350,6 +370,11 @@ public class FluxoController {
         listaSolicitacoes();
 
         listaRelatorio();
+
+        cmbSetorAtualizar.getItems().addAll("RH", "Automação", "Produção", "Estoque", "Controle de Qualidade");
+        cmbCategoriaAtualizar.getItems().addAll("Compra","Venda", "Serviço");
+        cmbPagtoAtualizar.getItems().addAll("Cartão de Crédito", "Transferência", "Boleto", "Pix");
+        cmbStatusAtualizar.getItems().addAll("Concluida", "Pendente");
 
         cmbSetor.getItems().addAll("RH", "Automação", "Produção", "Estoque", "Controle de Qualidade");
         cmbCategoria.getItems().addAll("Compra","Venda", "Serviço");
