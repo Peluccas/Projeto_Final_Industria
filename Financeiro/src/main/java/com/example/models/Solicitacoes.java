@@ -6,7 +6,7 @@ package com.example.models;
 public class Solicitacoes {
     private int id;
     private String data_solicitacao;
-    private int fk_setor;
+    private String fk_setor;
     private String descricao;
     private String quantidade;
     private double valor;
@@ -14,7 +14,7 @@ public class Solicitacoes {
     private String status;
 
 
-public Solicitacoes(int id, String data_solicitacao, int fk_setor, String descricao, String quantidade, double valor, String prazo, String status){
+public Solicitacoes(int id, String data_solicitacao, String fk_setor, String descricao, String quantidade, double valor, String prazo, String status){
     this.id = id;
     this.data_solicitacao = data_solicitacao;
     this.fk_setor = fk_setor;
@@ -41,11 +41,11 @@ public void setData_solicitacao(String data_solicitacao){
     this.data_solicitacao = data_solicitacao;
 }
 
-public int getFk_setor(){
+public String getFk_setor(){
     return fk_setor;
 }
 
-public void setFk_setor(int fk_setor){
+public void setFk_setor(String fk_setor){
     this.fk_setor = fk_setor;
 }
 

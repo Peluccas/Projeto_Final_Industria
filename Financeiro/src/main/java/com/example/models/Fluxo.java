@@ -4,16 +4,17 @@ package com.example.models;
 public class Fluxo{
     private int id;
     private String data_transacao;
-    private int fk_setor;
+    private String fk_setor;
     private String descricao;
     private double valor;
     private String categoria;
     private String forma_pagto;
     private String vencimento;
     private boolean status;
+  
 
 
-public Fluxo(int id, String data_transacao, int fk_setor, String descricao, double valor, String categoria, String forma_pagto, String vencimento, boolean status){
+public Fluxo(int id, String data_transacao, String fk_setor, String descricao, double valor, String categoria, String forma_pagto, String vencimento, boolean status){
     this.id = id;
     this.data_transacao = data_transacao;
     this.fk_setor = fk_setor;
@@ -23,6 +24,7 @@ public Fluxo(int id, String data_transacao, int fk_setor, String descricao, doub
     this.forma_pagto = forma_pagto;
     this.vencimento = vencimento;
     this.status = status;
+    
 }
 
 public int getId(){
@@ -41,11 +43,11 @@ public void setData_transacao(String data_transacao){
     this.data_transacao = data_transacao;
 }
 
-public int getFk_setor(){
+public String getFk_setor(){
     return fk_setor;
 }
 
-public void setFk_setor(int fk_setor){
+public void setFk_setor(String fk_setor){
     this.fk_setor = fk_setor;
 }
 
@@ -96,4 +98,7 @@ public boolean getStatus(){
 public void setStatus(boolean status){
     this.status = status;
 }
+
+
+
 }

@@ -233,12 +233,12 @@ public class FluxoController {
         
         try (Connection conn = Database.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM FLUXO")) {
+             ResultSet rs = stmt.executeQuery("SELECT fluxo.id_fluxo, fluxo.data_transacao, setores.nome_setor, fluxo.descricao, fluxo.valor, fluxo.categoria, fluxo.forma_pagto, fluxo.vencimento, fluxo.status FROM fluxo JOIN setores ON fluxo.fk_setor = setores.id_setores ")) {
                 while (rs.next()) {
                     listaFluxo.add(new 
                     Fluxo(rs.getInt("id_fluxo"), 
                     rs.getString("data_transacao"), 
-                    rs.getInt("fk_setor"), 
+                    rs.getString("nome_setor"), 
                     rs.getString("descricao"), 
                     rs.getDouble("valor"), 
                     rs.getString("categoria"), 
@@ -257,14 +257,14 @@ public class FluxoController {
         listaRelatorio.clear();
         try (Connection conn = Database.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM fluxo")) {
+             ResultSet rs = stmt.executeQuery("SELECT fluxo.id_fluxo, fluxo.data_transacao, setores.nome_setor, fluxo.descricao, fluxo.valor, fluxo.categoria, fluxo.forma_pagto, fluxo.vencimento, fluxo.status FROM fluxo JOIN setores ON fluxo.fk_setor = setores.id_setores")) {
                 while (rs.next()) {
                     listaRelatorio.add(new 
                     Fluxo(rs.getInt("id_fluxo"),
                      rs.getString("data_transacao"),
-                      rs.getInt("fk_setor"),
-                       rs.getString("descricao"), 
-                       rs.getDouble("valor"), 
+                     rs.getString("nome_setor"),
+                     rs.getString("descricao"), 
+                     rs.getDouble("valor"), 
                        rs.getString("categoria"), 
                        rs.getString("forma_pagto"),
                         rs.getString("vencimento"), 
@@ -320,6 +320,12 @@ public class FluxoController {
         colFluVencimento.setCellValueFactory(new PropertyValueFactory<>("vencimento"));
         colFluStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
 
+     
+
+    
+
+
+
         tableFluxo.setOnMouseClicked((MouseEvent event) -> {
             if (event.getClickCount() > 1) {
                 preencherCamposAtualizacao();
@@ -343,7 +349,7 @@ public class FluxoController {
 
         //Inicialização Pagamentos
         colPagFuncionario.setCellValueFactory(new PropertyValueFactory<>("fk_funcionarios"));
-        colPagSetor.setCellValueFactory(new PropertyValueFactory<>("fk_Setor"));
+        colPagSetor.setCellValueFactory(new PropertyValueFactory<>("fk_setor"));
         colPagData.setCellValueFactory(new PropertyValueFactory<>("data_pagto"));
         colPagSalario.setCellValueFactory(new PropertyValueFactory<>("salario_base"));
         colPagDescontos.setCellValueFactory(new PropertyValueFactory<>("descontos"));
@@ -390,12 +396,12 @@ public class FluxoController {
             listaSolicitacoes.clear();
            try (Connection conn = Database.getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM solicitacoes")) {
+                ResultSet rs = stmt.executeQuery("SELECT solicitacoes.id_solicitacoes, solicitacoes.data_solicitacao, setores.nome_setor, solicitacoes.descricao, solicitacoes.quantidade, solicitacoes.valor, solicitacoes.prazo, solicitacoes.status FROM solicitacoes JOIN setores ON solicitacoes.fk_setor = setores.id_setores")) {
                    while (rs.next()) {
                        listaSolicitacoes.add(new
                         Solicitacoes(rs.getInt("id_solicitacoes"), 
                         rs.getString("data_solicitacao"), 
-                        rs.getInt("fk_setor"), 
+                        rs.getString("nome_setor"), 
                         rs.getString("descricao"), 
                         rs.getString("quantidade"), 
                         rs.getDouble("valor"), 
@@ -441,13 +447,13 @@ public class FluxoController {
             listaFuncionarios.clear();
            try (Connection conn = Database.getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM pagfuncionarios")) {
+                ResultSet rs = stmt.executeQuery("SELECT pagfuncionarios.id_pagfuncionarios, funcionarios.nome, setores.nome_setor, pagfuncionarios.data_pagto, pagfuncionarios.salario_base, pagfuncionarios.descontos, pagfuncionarios.valor_liquido, pagfuncionarios.status FROM pagfuncionarios JOIN funcionarios ON pagfuncionarios.fk_funcionarios = funcionarios.id_funcionarios JOIN setores ON pagfuncionarios.fk_setor = setores.id_setores")) {
                    while (rs.next()) {
                        listaFuncionarios.add(new 
                        PagFuncionarios(
                         rs.getInt("id_pagfuncionarios"), 
-                       rs.getInt("fk_funcionarios"), 
-                       rs.getInt("fk_setor"),
+                       rs.getString("nome"), 
+                       rs.getString("nome_setor"),
                        rs.getString("data_pagto"), 
                        rs.getDouble("salario_base"), 
                        rs.getDouble("descontos"),
