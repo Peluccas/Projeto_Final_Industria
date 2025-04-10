@@ -88,11 +88,6 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="txtnacionalidadeFunc" layoutX="501.0" layoutY="523.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="439.0" promptText="Nacionalidade" AnchorPane.bottomAnchor="323.0" AnchorPane.leftAnchor="501.0">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </TextField>
                                           <Label layoutX="506.0" layoutY="560.0" text="Naturalidade (Cidade e estado)" AnchorPane.bottomAnchor="286.0" AnchorPane.leftAnchor="506.0">
                                              <font>
                                                 <Font size="16.0" />
@@ -186,6 +181,7 @@
                                           <ComboBox fx:id="comboBoxSexo" layoutX="501.0" layoutY="274.0" prefHeight="25.0" prefWidth="437.0" />
                                           <ComboBox fx:id="comboBoxEstadoCivil" layoutX="501.0" layoutY="336.0" prefHeight="25.0" prefWidth="439.0" />
                                           <ComboBox fx:id="comboBoxtipo_sanguineoFunc" layoutX="1088.0" layoutY="523.0" prefHeight="25.0" prefWidth="442.0" />
+                                          <ComboBox layoutX="502.0" layoutY="523.0" prefHeight="25.0" prefWidth="440.0" />
                                        </children>
                                     </AnchorPane>
                               </content>
@@ -261,10 +257,6 @@
                                              <font>
                                                 <Font size="16.0" />
                                              </font></Label>
-                                          <TextField fx:id="txtescolaridade" layoutX="1089.0" layoutY="347.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Nivel de escolaridade" AnchorPane.rightAnchor="390.0">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font></TextField>
                                           <Label layoutX="1099.0" layoutY="196.0" text="CTPS (Numero, Serie e data de emissão)">
                                              <font>
                                                 <Font size="16.0" />
@@ -325,6 +317,7 @@
                                           </Button>
                                           <ComboBox fx:id="comboBoxdepartamento" layoutX="501.0" layoutY="162.0" prefHeight="25.0" prefWidth="440.0" AnchorPane.bottomAnchor="690.0" />
                                           <ComboBox fx:id="comboBoxcontrato" layoutX="1089.0" layoutY="156.0" prefHeight="25.0" prefWidth="442.0" />
+                                          <ComboBox layoutX="1089.0" layoutY="347.0" prefHeight="25.0" prefWidth="441.0" />
                                        </children>
                                     </AnchorPane>
                               </content>

@@ -21,7 +21,7 @@ public class DadoPessoalController {
     @FXML private ComboBox<String> comboBoxEstadoCivil;
     @FXML private TextField txtconjugeFunc;
     @FXML private TextField txtdependentesFunc;
-    @FXML private TextField txtnacionalidadeFunc;
+    @FXML private ComboBox<String> comboBoxNacionalidade;
     @FXML private TextField txtnaturalidadeFunc;
     @FXML private TextField txtcpfFunc;
     @FXML private TextField txtrgFunc;
@@ -40,7 +40,7 @@ public class DadoPessoalController {
     @FXML private TextField txtsalario; 
     @FXML private TextField txtdadosbancarios;
     @FXML private TextField txtbeneficios;
-    @FXML private TextField txtescolaridade;
+    @FXML private ComboBox<String> comboBoxescolaridade;
     @FXML private TextField txtctps;
     @FXML private TextField txtpis;
     @FXML private ComboBox<String> comboBoxcontrato;
@@ -56,7 +56,7 @@ public class DadoPessoalController {
     @FXML private ComboBox<String>comboBoxEstadoCivilAtualizarFunc;
     @FXML private TextField txtConjugeAtualizarFunc;
     @FXML private TextField txtDependentesAtualizarFunc;
-    @FXML private TextField txtNacionalidadeAtualizarFunc;
+    @FXML private ComboBox<String>comboBoxNacionalidadeAtualizarFunc;
     @FXML private TextField txtNaturalidadeAtualizarFunc;
     @FXML private TextField txtCpfAtualizarFunc;
     @FXML private TextField txtRgAtualizarFunc;
@@ -75,7 +75,7 @@ public class DadoPessoalController {
     @FXML private TextField txtsalarioAtualizarFunc;
     @FXML private TextField txtdadosbancariosAtualizarFunc;
     @FXML private TextField txtbeneficiosAtualizarFunc;
-    @FXML private TextField txtescolaridadeAtualizarFunc;
+    @FXML private ComboBox<String>comboBoxescolaridadeAtualizarFunc;
     @FXML private TextField txtctpsAtualizarFunc;
     @FXML private TextField txtpisAtualizarFunc;
     @FXML private ComboBox<String>comboBoxcontratoAtualizarFunc;
@@ -132,7 +132,7 @@ public class DadoPessoalController {
     @FXML private ComboBox<String>filtroEstadoCivilFunc;
     @FXML private TextField filtroConjugeFunc;
     @FXML private TextField filtroDependentesFunc;
-    @FXML private TextField filtroNacionalidadeFunc;
+    @FXML private ComboBox<String>filtroNacionalidadeFunc;
     @FXML private TextField filtroNaturalidadeFunc;
     @FXML private TextField filtroCpfFunc;
     @FXML private TextField filtroRgFunc;
@@ -151,7 +151,7 @@ public class DadoPessoalController {
     @FXML private TextField filtrosalario;
     @FXML private TextField filtrodadosbancarios;
     @FXML private TextField filtrobeneficios;
-    @FXML private TextField filtroescolaridade;
+    @FXML private ComboBox<String>filtroescolaridade;
     @FXML private TextField filtroctps;
     @FXML private TextField filtropis;
     @FXML private ComboBox<String>filtrocontrato;
@@ -228,9 +228,110 @@ public class DadoPessoalController {
  );
          comboBoxtipo_sanguineoFunc.setItems(tiposSanguineos);
          filtroTipoSanguineoFunc.setItems(tiposSanguineos);
-         
 
-          
+
+         ObservableList<String> nacionalidade = FXCollections.observableArrayList(
+           
+
+"Afeganistão",
+"África do Sul",
+"Albânia",
+"Alemanha",
+"Angola",
+"Argentina",
+"Austrália",
+"Áustria",
+"Bangladesh",
+"Belarus",
+"Bélgica",
+"Bolívia",
+"Brasil",
+"Cabo Verde",
+"Camarões",
+"Canadá",
+"Chile",
+"China",
+"Colômbia",
+"Coreia do Sul",
+"Costa Rica",
+"Cuba",
+"Dinamarca",
+"Equador",
+"Egito",
+"Espanha",
+"Estados Unidos",
+"Etiópia",
+"Filipinas",
+"França",
+"Gana",
+"Guatemala",
+"Haiti",
+"Honduras",
+"Índia",
+"Indonésia",
+"Inglaterra",
+"Irlanda",
+"Itália",
+"Jamaica",
+"Japão",
+"Líbano",
+"Líbia",
+"México",
+"Moçambique",
+"Nigéria",
+"Paquistão",
+"Paraguai",
+"Peru",
+"Polônia",
+"Portugal",
+"Reino Unido",
+"República Dominicana",
+"Romênia",
+"Rússia",
+"Senegal",
+"Síria",
+"Ucrânia",
+"Uruguai",
+"Venezuela",
+"Vietnã",
+"Apátrida",
+"Outra nacionalidade"
+
+         );
+
+        comboBoxNacionalidade.setItems(nacionalidade);
+        filtroNacionalidadeFunc.setItems(nacionalidade);
+
+
+         ObservableList<String> escolaridade = FXCollections.observableArrayList(
+
+    "Fundamental Incompleto (Até 5º ano)",
+    "Fundamental Incompleto (Até 9º ano)",
+    "Fundamental Completo",
+    "Médio Incompleto",
+    "Médio Completo",
+    "Técnico Incompleto",
+    "Técnico Completo",
+    "Graduação Incompleta",
+    "Graduação Completa (Bacharelado)",
+    "Graduação Completa (Licenciatura)",
+    "Graduação Completa (Tecnólogo)",
+    "Pós-graduação Incompleta",
+    "Especialização",
+    "MBA",
+    "Mestrado",
+    "Doutorado",
+    "Pós-doutorado",
+    "Curso de Extensão",
+    "Curso de Aperfeiçoamento",
+    "Curso Profissionalizante",
+    "Outros"
+
+         );
+
+         comboBoxescolaridade.setItems(escolaridade);
+         comboBoxescolaridadeAtualizarFunc.setItems(escolaridade);
+         filtroescolaridade.setItems(escolaridade);
                    
     
         carregarDadoPessoal();
