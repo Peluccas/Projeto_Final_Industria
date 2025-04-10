@@ -8,8 +8,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class FluxoController {
     @FXML private TextField txtData;
@@ -57,6 +59,11 @@ public class FluxoController {
     @FXML private TableColumn<PagFuncionarios, Double> colPagDescontos;
     @FXML private TableColumn<PagFuncionarios, Double> colPagLiquido;
     @FXML private TableColumn<PagFuncionarios, Boolean> colPagStatus;
+    @FXML private TextField txtFuncionarioPagto;
+    @FXML private ComboBox<String> cmbStatusPagto;
+    @FXML private DatePicker filtroPagto;
+
+
 
 
     //Tabela Relatorio
@@ -69,6 +76,9 @@ public class FluxoController {
     @FXML private TableColumn<Fluxo, Double> colReForma;
     @FXML private TableColumn<Fluxo, String> colReVencimento;
     @FXML private TableColumn<Fluxo, String> colReStatus;
+
+    @FXML private DatePicker dataInicio;
+    @FXML private DatePicker dataFim;
 
     //Campos para atualização
     @FXML private TextField txtDataAtualizar;
@@ -90,6 +100,7 @@ public class FluxoController {
     @FXML private ChoiceBox<Boolean> filtroStatus;
 
 
+   //Declaração de Tabs
     @FXML private TabPane tabPane;
     @FXML private Tab tabFluxo;
     @FXML private Tab tabSolicitacoes;
@@ -306,91 +317,6 @@ public class FluxoController {
         cmbStatus.setValue(null);
     }
 
-
-
-    @FXML
-    public void initialize() {
-        //Inicializacao Fluxo
-        colFluData.setCellValueFactory(new PropertyValueFactory<>("data_transacao"));
-        colFluSetor.setCellValueFactory(new PropertyValueFactory<>("fk_setor"));
-        colFluDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        colFluValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
-        colFluCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
-        colFluPagto.setCellValueFactory(new PropertyValueFactory<>("forma_pagto"));
-        colFluVencimento.setCellValueFactory(new PropertyValueFactory<>("vencimento"));
-        colFluStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
-
-     
-
-    
-
-
-
-        tableFluxo.setOnMouseClicked((MouseEvent event) -> {
-            if (event.getClickCount() > 1) {
-                preencherCamposAtualizacao();
-            }
-        });
-
-        //Inicialização Solicitações
-        colSoData.setCellValueFactory(new PropertyValueFactory<>("data_solicitacao"));
-        colSoSetor.setCellValueFactory(new PropertyValueFactory<>("fk_setor"));
-        colSoDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        colSoQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-        colSoValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
-        colSoPrazo.setCellValueFactory(new PropertyValueFactory<>("prazo"));
-        colSoStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        tableSolicitacoes.setOnMouseClicked((MouseEvent event) -> {
-            if (event.getClickCount() > 1) {
-                listaSolicitacoes();
-            }
-        });
-
-        //Inicialização Pagamentos
-        colPagFuncionario.setCellValueFactory(new PropertyValueFactory<>("fk_funcionarios"));
-        colPagSetor.setCellValueFactory(new PropertyValueFactory<>("fk_setor"));
-        colPagData.setCellValueFactory(new PropertyValueFactory<>("data_pagto"));
-        colPagSalario.setCellValueFactory(new PropertyValueFactory<>("salario_base"));
-        colPagDescontos.setCellValueFactory(new PropertyValueFactory<>("descontos"));
-        colPagLiquido.setCellValueFactory(new PropertyValueFactory<>("valor_liquido"));
-        colPagStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        //Inicialização Relatorio
-        colReData.setCellValueFactory(new PropertyValueFactory<>("data_transacao"));
-        colReSetor.setCellValueFactory(new PropertyValueFactory<>("fk_setor"));
-        colReDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        colReValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
-        colReCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
-        colReForma.setCellValueFactory(new PropertyValueFactory<>("forma_pagto"));
-        colReVencimento.setCellValueFactory(new PropertyValueFactory<>("vencimento"));
-        colReStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
-
-       
-
-
-
-        listaFuncionarios();
-
-        
-        listaSolicitacoes();
-
-        listaRelatorio();
-
-        cmbSetorAtualizar.getItems().addAll("RH", "Automação", "Produção", "Estoque", "Controle de Qualidade");
-        cmbCategoriaAtualizar.getItems().addAll("Compra","Venda", "Serviço");
-        cmbPagtoAtualizar.getItems().addAll("Cartão de Crédito", "Transferência", "Boleto", "Pix");
-        cmbStatusAtualizar.getItems().addAll("Concluida", "Pendente");
-
-        cmbSetor.getItems().addAll("RH", "Automação", "Produção", "Estoque", "Controle de Qualidade");
-        cmbCategoria.getItems().addAll("Compra","Venda", "Serviço");
-        cmbPagto.getItems().addAll("Cartão de Crédito", "Transferência", "Boleto", "Pix");
-        cmbStatus.getItems().addAll("Concluida", "Pendente");
-
-        listaFluxo();
-
-    }
-
     @FXML
     private void listaSolicitacoes(){
             listaSolicitacoes.clear();
@@ -467,4 +393,140 @@ public class FluxoController {
        }
 
 
+       @FXML
+       private void relatorioPeriodico() {
+
+           LocalDate dataInicial = dataInicio.getValue();
+           LocalDate dataFinal = dataFim.getValue();
+           try (Connection conn = Database.getConnection();
+           PreparedStatement stmt = conn.prepareStatement("SELECT FROM fluxo WHERE data_transacao BETWEEN ? AND ?")) {
+
+           stmt.setDate(1, dataInicial != null ? java.sql.Date.valueOf(dataInicial) : null);
+           stmt.setDate(2, dataFinal != null ? java.sql.Date.valueOf(dataFinal) : null );
+
+        
+             
+           } catch (SQLException e){
+               e.printStackTrace();
+           }
+       }
+
+       @FXML
+       private void filtroTabPagto() {
+
+           LocalDate dataComeco = filtroPagto.getValue();
+          
+           try (Connection conn = Database.getConnection();
+           PreparedStatement stmt = conn.prepareStatement("SELECT FROM pag_funcionarios WHERE data_transacao = ?")) {
+
+           stmt.setDate(1, dataComeco != null ? java.sql.Date.valueOf(dataComeco) : null);
+                
+             
+           } catch (SQLException e){
+               e.printStackTrace();
+           }
+       }
+
+       private void preencherCamposPagto() {
+        PagFuncionarios funcionarioSelecionado = tablePagamento.getSelectionModel().getSelectedItem();
+        if (funcionarioSelecionado != null){
+            txtFuncionarioPagto.setText(String.valueOf(funcionarioSelecionado.getFk_funcionarios()));
+            cmbStatusAtualizar.setValue(String.valueOf(funcionarioSelecionado.getStatus()));
+
+
+        }
+    }
+
+
+
+
+    @FXML
+    public void initialize() {
+        //Inicializacao Fluxo
+        colFluData.setCellValueFactory(new PropertyValueFactory<>("data_transacao"));
+        colFluSetor.setCellValueFactory(new PropertyValueFactory<>("fk_setor"));
+        colFluDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        colFluValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
+        colFluCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        colFluPagto.setCellValueFactory(new PropertyValueFactory<>("forma_pagto"));
+        colFluVencimento.setCellValueFactory(new PropertyValueFactory<>("vencimento"));
+        colFluStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
+
+     
+
+
+        tableFluxo.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getClickCount() > 1) {
+                preencherCamposAtualizacao();
+            }
+        });
+
+        //Inicialização Solicitações
+        colSoData.setCellValueFactory(new PropertyValueFactory<>("data_solicitacao"));
+        colSoSetor.setCellValueFactory(new PropertyValueFactory<>("fk_setor"));
+        colSoDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        colSoQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+        colSoValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
+        colSoPrazo.setCellValueFactory(new PropertyValueFactory<>("prazo"));
+        colSoStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        tableSolicitacoes.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getClickCount() > 1) {
+                listaSolicitacoes();
+            }
+        });
+
+        //Inicialização Pagamentos
+        colPagFuncionario.setCellValueFactory(new PropertyValueFactory<>("fk_funcionarios"));
+        colPagSetor.setCellValueFactory(new PropertyValueFactory<>("fk_setor"));
+        colPagData.setCellValueFactory(new PropertyValueFactory<>("data_pagto"));
+        colPagSalario.setCellValueFactory(new PropertyValueFactory<>("salario_base"));
+        colPagDescontos.setCellValueFactory(new PropertyValueFactory<>("descontos"));
+        colPagLiquido.setCellValueFactory(new PropertyValueFactory<>("valor_liquido"));
+        colPagStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        tableFluxo.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getClickCount() > 1) {
+                preencherCamposAtualizacao();
+            }
+        });
+
+        //Inicialização Relatorio
+        colReData.setCellValueFactory(new PropertyValueFactory<>("data_transacao"));
+        colReSetor.setCellValueFactory(new PropertyValueFactory<>("fk_setor"));
+        colReDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        colReValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
+        colReCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        colReForma.setCellValueFactory(new PropertyValueFactory<>("forma_pagto"));
+        colReVencimento.setCellValueFactory(new PropertyValueFactory<>("vencimento"));
+        colReStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
+        
+
+        listaFuncionarios();
+        
+        listaSolicitacoes();
+
+        listaRelatorio();
+
+        cmbSetorAtualizar.getItems().addAll("RH", "Automação", "Produção", "Estoque", "Controle de Qualidade");
+        cmbCategoriaAtualizar.getItems().addAll("Compra","Venda", "Serviço");
+        cmbPagtoAtualizar.getItems().addAll("Cartão de Crédito", "Transferência", "Boleto", "Pix");
+        cmbStatusAtualizar.getItems().addAll("Concluida", "Pendente");
+
+        cmbSetor.getItems().addAll("RH", "Automação", "Produção", "Estoque", "Controle de Qualidade");
+        cmbCategoria.getItems().addAll("Compra","Venda", "Serviço");
+        cmbPagto.getItems().addAll("Cartão de Crédito", "Transferência", "Boleto", "Pix");
+        cmbStatus.getItems().addAll("Concluida", "Pendente");
+
+        cmbStatusPagto.getItems().addAll("Concluida", "Pendente");
+
+        listaFluxo();
+
+    }
+
+
+    
+    
+
+   
 }
