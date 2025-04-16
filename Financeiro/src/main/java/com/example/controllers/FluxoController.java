@@ -8,7 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
+
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -194,13 +194,31 @@ public class FluxoController {
             status_validado = false;
         }
 
-     
+        if ("RH".equals(setor)) {
+            setor_validado = 1;
+        } else if ("AUTOMAÇÃO".equals(setor)) {
+            setor_validado = 2;
+        } else if ("PRODUÇÃO".equals(setor)) {
+            setor_validado = 3;
+        } else if ("ESTOQUE".equals(setor)) {
+            setor_validado = 4;
+        } else if ("CONTROLE DE QUALIDADE".equals(setor)) {
+            setor_validado = 5;
+        } else if ("FINANCEIRO".equals(setor)) {
+            setor_validado = 6;
+        }
+
+        if (setor_validado == null) {
+            System.out.println("Erro: setor não selecionado ou inválido!");
+            return; 
+        }
+
 
         try (Connection conn = Database.getConnection();
         PreparedStatement stmt = conn.prepareStatement("UPDATE fluxo SET data_transacao = ?, fk_setor = ?, descricao = ?, valor = ?, categoria = ?, forma_pagto = ?, vencimento = ?, status = ? WHERE id_fluxo = ?")) {
         
             stmt.setString(1, data);
-            stmt.setString(2, cmbSetorAtualizar.getValue());
+            stmt.setInt(2, setor_validado);
             stmt.setString(3, descricao);
             stmt.setDouble(4, valor);
             stmt.setString(5, cmbCategoriaAtualizar.getValue());
@@ -342,12 +360,15 @@ public class FluxoController {
    
        @FXML
        private void aceitar() {
+
+        Solicitacoes SolicitacaoSelecionada = tableSolicitacoes.getSelectionModel().getSelectedItem(); 
           
            try (Connection conn = Database.getConnection();
            PreparedStatement stmt = conn.prepareStatement("update solicitacoes set status = 'Aprovada' where id_solicitacoes = ?")) {
-           
+            
+           stmt.setInt(1, SolicitacaoSelecionada.getId() );
                      
-               listaSolicitacoes();
+            listaSolicitacoes();
    
            } catch (SQLException e){
                e.printStackTrace();
@@ -356,12 +377,15 @@ public class FluxoController {
    
        @FXML
        private void recusar() {
+        Solicitacoes SolicitacaoSelecionada = tableSolicitacoes.getSelectionModel().getSelectedItem(); 
+          
           
            try (Connection conn = Database.getConnection();
            PreparedStatement stmt = conn.prepareStatement("update solicitacoes set status = 'Recusada' where id_solicitacoes = ?")) {
+           stmt.setInt(1, SolicitacaoSelecionada.getId() );
            
                      
-               listaSolicitacoes();
+            listaSolicitacoes();
    
            } catch (SQLException e){
                e.printStackTrace();
@@ -427,6 +451,7 @@ public class FluxoController {
            }
        }
 
+/* 
        private void preencherCamposPagto() {
         PagFuncionarios funcionarioSelecionado = tablePagamento.getSelectionModel().getSelectedItem();
         if (funcionarioSelecionado != null){
@@ -437,7 +462,7 @@ public class FluxoController {
         }
     }
 
-
+*/
 
 
     @FXML
@@ -508,12 +533,12 @@ public class FluxoController {
 
         listaRelatorio();
 
-        cmbSetorAtualizar.getItems().addAll("RH", "Automação", "Produção", "Estoque", "Controle de Qualidade");
+        cmbSetorAtualizar.getItems().addAll("RH", "AUTOMAÇÃO", "PRODUÇÃO", "ESTOQUE", "CONTROLE DE QUALIDADE");
         cmbCategoriaAtualizar.getItems().addAll("Compra","Venda", "Serviço");
         cmbPagtoAtualizar.getItems().addAll("Cartão de Crédito", "Transferência", "Boleto", "Pix");
         cmbStatusAtualizar.getItems().addAll("Concluida", "Pendente");
 
-        cmbSetor.getItems().addAll("RH", "Automação", "Produção", "Estoque", "Controle de Qualidade");
+        cmbSetor.getItems().addAll("RH", "AUTOMAÇÃO", "PRODUÇÃO", "ESTOQUE", "CONTROLE DE QUALIDADE");
         cmbCategoria.getItems().addAll("Compra","Venda", "Serviço");
         cmbPagto.getItems().addAll("Cartão de Crédito", "Transferência", "Boleto", "Pix");
         cmbStatus.getItems().addAll("Concluida", "Pendente");
