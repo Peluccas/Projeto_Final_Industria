@@ -226,6 +226,7 @@ public class FluxoController {
             stmt.setString(7, vencimento);
             stmt.setBoolean(8, status_validado);
             stmt.setInt(9, fluxoSelecionado.getId());
+            stmt.executeUpdate();
 
             listaFluxo();
             tabPane.getSelectionModel().select(tabFluxo);
@@ -367,6 +368,7 @@ public class FluxoController {
            PreparedStatement stmt = conn.prepareStatement("update solicitacoes set status = 'Aprovada' where id_solicitacoes = ?")) {
             
            stmt.setInt(1, SolicitacaoSelecionada.getId() );
+           stmt.executeUpdate();
                      
             listaSolicitacoes();
    
@@ -383,6 +385,7 @@ public class FluxoController {
            try (Connection conn = Database.getConnection();
            PreparedStatement stmt = conn.prepareStatement("update solicitacoes set status = 'Recusada' where id_solicitacoes = ?")) {
            stmt.setInt(1, SolicitacaoSelecionada.getId() );
+           stmt.executeUpdate();
            
                      
             listaSolicitacoes();
@@ -419,50 +422,103 @@ public class FluxoController {
 
        @FXML
        private void relatorioPeriodico() {
-
+       
            LocalDate dataInicial = dataInicio.getValue();
            LocalDate dataFinal = dataFim.getValue();
+       
+           if (dataInicial == null || dataFinal == null) {
+               System.out.println("Selecione as datas de início e fim.");
+               return;
+           }
+       
            try (Connection conn = Database.getConnection();
-           PreparedStatement stmt = conn.prepareStatement("SELECT FROM fluxo WHERE data_transacao BETWEEN ? AND ?")) {
-
-           stmt.setDate(1, dataInicial != null ? java.sql.Date.valueOf(dataInicial) : null);
-           stmt.setDate(2, dataFinal != null ? java.sql.Date.valueOf(dataFinal) : null );
-
-        
-             
-           } catch (SQLException e){
+                PreparedStatement stmt = conn.prepareStatement(
+                    "SELECT fluxo.id_fluxo, fluxo.data_transacao, setores.nome_setor, fluxo.descricao, fluxo.valor, fluxo.categoria, fluxo.forma_pagto, fluxo.vencimento, fluxo.status FROM fluxo JOIN setores ON fluxo.fk_setor = setores.id_setores WHERE fluxo.data_transacao BETWEEN ? AND ?")) {
+       
+               stmt.setDate(1, java.sql.Date.valueOf(dataInicial));
+               stmt.setDate(2, java.sql.Date.valueOf(dataFinal));
+       
+               ResultSet rs = stmt.executeQuery();
+               listaRelatorio.clear(); 
+       
+               while (rs.next()) {
+                   listaRelatorio.add(new Fluxo(
+                       rs.getInt("id_fluxo"),
+                       rs.getString("data_transacao"),
+                       rs.getString("nome_setor"),
+                       rs.getString("descricao"),
+                       rs.getDouble("valor"),
+                       rs.getString("categoria"),
+                       rs.getString("forma_pagto"),
+                       rs.getString("vencimento"),
+                       rs.getBoolean("status")
+                   ));
+               }
+       
+               tableRelatorio.setItems(listaRelatorio);
+       
+           } catch (SQLException e) {
                e.printStackTrace();
            }
        }
+       
 
        @FXML
        private void filtroTabPagto() {
 
            LocalDate dataComeco = filtroPagto.getValue();
-          
-           try (Connection conn = Database.getConnection();
-           PreparedStatement stmt = conn.prepareStatement("SELECT FROM pag_funcionarios WHERE data_transacao = ?")) {
 
-           stmt.setDate(1, dataComeco != null ? java.sql.Date.valueOf(dataComeco) : null);
-                
-             
-           } catch (SQLException e){
-               e.printStackTrace();
-           }
+           if (dataComeco == null) {
+            System.out.println("Selecione a data para filtrar!");
+            return;
+        }
+
+        try (Connection conn = Database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+                 "SELECT pagfuncionarios.id_pagfuncionarios, funcionarios.nome, setores.nome_setor, pagfuncionarios.data_pagto, pagfuncionarios.salario_base, pagfuncionarios.descontos, pagfuncionarios.valor_liquido, pagfuncionarios.status " +
+                 "FROM pagfuncionarios " +
+                 "JOIN funcionarios ON pagfuncionarios.fk_funcionarios = funcionarios.id_funcionarios " +
+                 "JOIN setores ON pagfuncionarios.fk_setor = setores.id_setores " +
+                 "WHERE pagfuncionarios.data_pagto = ?")) {
+        
+            stmt.setDate(1, dataComeco != null ? java.sql.Date.valueOf(dataComeco) : null);
+        
+            ResultSet rs = stmt.executeQuery();
+            listaFuncionarios.clear();
+        
+            while (rs.next()) {
+                listaFuncionarios.add(new PagFuncionarios(
+                    rs.getInt("id_pagfuncionarios"),
+                    rs.getString("nome"),
+                    rs.getString("nome_setor"),
+                    rs.getString("data_pagto"),
+                    rs.getDouble("salario_base"),
+                    rs.getDouble("descontos"),
+                    rs.getDouble("valor_liquido"),
+                    rs.getBoolean("status")
+                ));
+            }
+        
+            tablePagamento.setItems(listaFuncionarios);
+        
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
        }
 
-/* 
+
+
        private void preencherCamposPagto() {
         PagFuncionarios funcionarioSelecionado = tablePagamento.getSelectionModel().getSelectedItem();
         if (funcionarioSelecionado != null){
-            txtFuncionarioPagto.setText(String.valueOf(funcionarioSelecionado.getFk_funcionarios()));
-            cmbStatusAtualizar.setValue(String.valueOf(funcionarioSelecionado.getStatus()));
+            txtFuncionarioPagto.setText(funcionarioSelecionado.getFk_funcionarios());
+            cmbStatusPagto.setValue(String.valueOf(funcionarioSelecionado.getStatus()));
 
 
         }
     }
 
-*/
+
 
 
     @FXML
@@ -512,7 +568,7 @@ public class FluxoController {
 
         tableFluxo.setOnMouseClicked((MouseEvent event) -> {
             if (event.getClickCount() > 1) {
-                preencherCamposAtualizacao();
+                preencherCamposPagto();
             }
         });
 
