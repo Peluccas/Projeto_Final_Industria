@@ -377,30 +377,41 @@ public class DadoPessoalController {
         comboBoxcontratoAtualizarFunc.setItems(contratos);
         filtrocontrato.setItems(contratos);
 
+        tableDadoPessoal.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getClickCount() > 1) {
+                preencherMultiplosCampos();
+            }
+        });
+
+        tableDadoProfissional.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getClickCount() > 1) {
+                preencherMultiplosCampos();
+            }
+        });
+
               
 
         carregarDadoProfissional();
 
-        tableDadoPessoal.setOnMouseClicked(this::handleTableClick);
-
-        tableDadoProfissional.setOnMouseClicked(this::handleTableClick);
-
 }  
 
-private void handleTableClick(MouseEvent event) {
-    if (event.getClickCount() > 1) {
-        // Move para a aba de atualização
-        tabPaneVisualizacao.getSelectionModel().select(tabAtualizacao);
-        // Move para a aba de dados pessoais na atualização (pode ajustar conforme preferir)
-        tabPaneAtualizar.getSelectionModel().select(tabAtualizarPessoal);
-        tabPaneAtualizar.getSelectionModel().select(tabAtualizarProfissional);
+
+    private void preencherMultiplosCampos () {
+    DadoPessoal dadopessoalSelecionado = tableDadoPessoal.getSelectionModel().getSelectedItem();
+    DadoProfissional dadoprofissionalSelecionado = tableDadoProfissional.getSelectionModel().getSelectedItem();
+
+    if (dadopessoalSelecionado.getId() == dadoprofissionalSelecionado.getIdprof()) {
         preencherCamposAtualizacaoPessoal();
         preencherCamposAtualizacaoProfissional();
+        
+    } else {
+        System.err.println("ERRO AO CARREGAR!");
     }
-}
+    };
 
 @FXML
 private void salvarDadosProfissional() {
+
     
     try (Connection conn = Database.getConnection();
          PreparedStatement stmt = conn.prepareStatement("INSERT INTO dadospessoais (nome_completo, data_nascimento, sexo, estado_civil, conjuge, dependentes, nacionalidade, naturalidade, cpf, rg, endereco, telefone, email, filiacao, tipo_sanguineo, contato_emergencia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -584,7 +595,6 @@ public void atualizarDadoProfissional() {
         mostrarAlerta(Alert.AlertType.WARNING, "Atenção", "Selecione um funcionário na tabela para atualizar.");
     }
     }
-
     
         @FXML private void atualizarDadoPessoal() {
     tabPaneAtualizar.getSelectionModel().select(tabAtualizarProfissional);
@@ -854,6 +864,7 @@ public void atualizarDadoProfissional() {
         } else {
             mostrarAlerta(Alert.AlertType.WARNING, "Atenção", "Selecione um funcionário para excluir!");
         }
+        limparCamposAtualizacao();
     }
 
 
