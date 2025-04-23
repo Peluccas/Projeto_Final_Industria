@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1040.0" prefWidth="1239.0" style="-fx-background-color: c3d5db;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="Gestão de RH" />
+      <ImageView fitHeight="27.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../Desktop/OIP.png" />
+         </image>
+      </ImageView>
+      <TabPane prefHeight="1008.0" prefWidth="1133.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Cadastro">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="985.0" prefWidth="1133.0" style="-fx-background-color: c3d5db;">
+                     <children>
+                        <Label alignment="CENTER" layoutY="6.0" prefHeight="17.0" prefWidth="502.0" text="Dados Pessoais">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="61.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Nome Completo" />
+                        <TextField layoutX="61.0" layoutY="121.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="440.0" promptText="Data de nascimento" />
+                        <TextField layoutX="60.0" layoutY="277.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="440.0" promptText="Conjuge (Nome e data de Nascimento)" />
+                        <TextField layoutX="60.0" layoutY="224.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Estado Civil" />
+                        <TextField layoutX="60.0" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="440.0" promptText="Sexo" />
+                        <Label layoutX="61.0" layoutY="53.0" text="Nome Completo" />
+                        <Label layoutX="61.0" layoutY="104.0" text="Data de nascimento" />
+                        <Label layoutX="61.0" layoutY="153.0" text="Sexo" />
+                        <Label layoutX="60.0" layoutY="207.0" text="Estado Civil" />
+                        <Label layoutX="60.0" layoutY="260.0" text="Conjuge (Nome e data de Nascimento)" />
+                        <Label layoutX="60.0" layoutY="312.0" text="Dependentes (Nome e data de nascimento)" />
+                        <TextField layoutX="60.0" layoutY="329.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="439.0" promptText="Dependentes (Nome e data de nascimento)" />
+                        <Label layoutX="60.0" layoutY="364.0" text="Nacionalidade" />
+                        <TextField layoutX="60.0" layoutY="381.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="439.0" promptText="Nacionalidade" />
+                        <Label layoutX="60.0" layoutY="416.0" text="Naturalidade (Cidade e estado)" />
+                        <TextField layoutX="60.0" layoutY="433.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="439.0" promptText="Naturalidade (Cidade e estado)" />
+                        <Label layoutX="60.0" layoutY="467.0" text="CPF" />
+                        <TextField layoutX="60.0" layoutY="484.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="439.0" promptText="CPF" />
+                        <Label layoutX="60.0" layoutY="520.0" text="RG" />
+                        <TextField layoutX="60.0" layoutY="537.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="440.0" promptText="RG" />
+                        <Label layoutX="60.0" layoutY="576.0" text="Endereço completo" />
+                        <TextField layoutX="60.0" layoutY="593.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Endereço completo" />
+                        <Label layoutX="60.0" layoutY="634.0" text="Telefone" />
+                        <TextField layoutX="60.0" layoutY="651.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="443.0" promptText="Telefone" />
+                        <Label layoutX="60.0" layoutY="691.0" text="Email" />
+                        <TextField layoutX="61.0" layoutY="708.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="444.0" promptText="Email" />
+                        <Label layoutX="61.0" layoutY="746.0" text="Filiação" />
+                        <TextField layoutX="60.0" layoutY="763.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="448.0" promptText="Filiação" />
+                        <Label layoutX="60.0" layoutY="798.0" text="Tipo Sanguineo" />
+                        <TextField layoutX="59.0" layoutY="815.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="448.0" promptText="Tipo Sanguineo" />
+                        <Label layoutX="61.0" layoutY="851.0" text="Contato em caso de emergência" />
+                        <TextField layoutX="59.0" layoutY="868.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="448.0" promptText="Contato em caso de emergência" />
+                        <Label alignment="CENTER" layoutX="617.0" layoutY="6.0" prefHeight="17.0" prefWidth="502.0" text="Dados profissionais">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="647.0" layoutY="53.0" text="Cargo" />
+                        <TextField layoutX="647.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Cargo" />
+                        <Label layoutX="647.0" layoutY="104.0" text="Departamento" />
+                        <TextField layoutX="647.0" layoutY="121.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Departamento" />
+                        <Label layoutX="647.0" layoutY="153.0" text="Descrição das funções" />
+                        <TextField layoutX="647.0" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Descrição das funções" />
+                        <Label layoutX="647.0" layoutY="207.0" text="Máquinas que opera" />
+                        <TextField layoutX="648.0" layoutY="224.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Máquinas que opera" />
+                        <Label layoutX="647.0" layoutY="260.0" text="Data de admissão" />
+                        <TextField layoutX="647.0" layoutY="277.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Data de admissão" />
+                        <Label layoutX="647.0" layoutY="312.0" text="Salário" />
+                        <TextField layoutX="647.0" layoutY="329.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Salário" />
+                        <TextField layoutX="647.0" layoutY="381.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Dados bancários (Para deposito salário)" />
+                        <Label layoutX="647.0" layoutY="416.0" text="Beneficios e Bonificações" />
+                        <TextField layoutX="647.0" layoutY="433.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Beneficios e Bonificações" />
+                        <Label layoutX="647.0" layoutY="467.0" text="Nivel de escolaridade" />
+                        <TextField layoutX="648.0" layoutY="484.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Nivel de escolaridade" />
+                        <Label layoutX="649.0" layoutY="520.0" text="CTPS (Numero, Serie e data de emissão)" />
+                        <TextField layoutX="647.0" layoutY="537.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="CTPS (Numero, Serie e data de emissão)" />
+                        <Label layoutX="649.0" layoutY="576.0" text="PIS/ Pasesp" />
+                        <TextField layoutX="648.0" layoutY="593.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="PIS/ Pasesp" />
+                        <Label layoutX="649.0" layoutY="634.0" text="Tipo de contrato (Temporario/CLT)" />
+                        <TextField layoutX="647.0" layoutY="651.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Tipo de contrato (Temporario/CLT)" />
+                        <Label layoutX="649.0" layoutY="691.0" text="Horario de trabalho (Dias, turno e carga horaria)" />
+                        <TextField layoutX="647.0" layoutY="708.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Horario de trabalho (Dias, turno e carga horaria)" />
+                        <Label layoutX="645.0" layoutY="746.0" text="Acidentes de trabalho (Data, descrição e medidas tomadas)" />
+                        <TextField layoutX="641.0" layoutY="763.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Acidentes de trabalho (Data, descrição e medidas tomadas)" />
+                        <Label layoutX="645.0" layoutY="798.0" text="Advertências (Data e ocorrência)" />
+                        <TextField layoutX="641.0" layoutY="815.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="441.0" promptText="Advertências (Data e ocorrência)" />
+                        <Button layoutX="515.0" layoutY="902.0" mnemonicParsing="false" onAction="#insertCadastrar" prefHeight="41.0" prefWidth="104.0" text="Cadastrar" />
+                        <Label layoutX="645.0" layoutY="364.0" text="Dados bancários (Para deposito salário)" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Visualização">
+       <content>
+        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="922.0" prefWidth="1335.0">
+               <children>
+                  <ButtonBar layoutX="26.0" layoutY="44.0" prefHeight="40.0" prefWidth="200.0" />
+                  <TabPane layoutX="-3.0" layoutY="56.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="1242.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Dados Pessoais">
+                           <content>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <TabPane layoutX="-3.0" layoutY="-1.0" prefHeight="494.0" prefWidth="1249.0" tabClosingPolicy="UNAVAILABLE">
+                                      <tabs>
+                                        <Tab text="ID" />
+                                        <Tab id="textNome" fx:id="txtNome" text="Nome">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                          </content>
+                                        </Tab>
+                                          <Tab id="textDataNascimento" text="Data Nascimento">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textSexo" fx:id="txtSexo" text="Sexo">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textEstadoCivil" fx:id="txtEstadoCivil" text="Estado Civil">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textConjuge" fx:id="txtConjuge" text="Conjuge">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textDependentes" fx:id="txtDependentes" text="Dependentes">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textNacionalidade" fx:id="txtNacionalidade" text="Nacionalidade">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textNaturalidade" fx:id="txtNaturalidade" text="Naturalidade">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab text="CPF">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab text="RG">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textEndereço" fx:id="txtEndereço" text="Endereço">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textTelefone" text="Telefone">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textEmail" fx:id="txtEmail" text="Email">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textFiliação" fx:id="txtFiliação" text="Filiação">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="1397.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textTipoSangue" fx:id="txtTipoSangue" text="Tipo Sangue">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textContato" fx:id="txtContato" text="Contato Emergência">
+                                            <content>
+                                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                      </Tab>
+                      <Tab text="Dados Profissionais">
+                        <content>
+                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="879.0" prefWidth="1243.0">
+                                 <children>
+                                    <TabPane fx:id="txtFuncao" layoutX="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="207.0" prefWidth="1272.0" tabClosingPolicy="UNAVAILABLE">
+                                      <tabs>
+                                        <Tab id="textCargo" fx:id="txtCargo" text="Cargo">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="178.0" prefWidth="1096.0" />
+                                          </content>
+                                        </Tab>
+                                        <Tab id="textDepartamento" fx:id="txtDepartamento" text="Departamento">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                          </content>
+                                        </Tab>
+                                          <Tab id="textFunção" fx:id="txtFuncao" text="Função">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textMaquinas" fx:id="txtMaquinas" text="Máquinas Opera">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textDataAdmissão" fx:id="txtDataAdmissão" text="Data Admissão">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textSalário" fx:id="txtSalario" text="Salário">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textDadosBancários" fx:id="txtDadosBancarios" text="Dados Bancários">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textBeneficios" fx:id="txtBeneficios" text="Benefícios">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textEscolaridade" fx:id="txtEscolaridade" text="Escolaridade">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textCtps" fx:id="txtCtps" text="CTPS">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textPisPasep" fx:id="txtPisPasep" text="PIS/Pasep">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textContrato" fx:id="txtContrato" text="Contrato">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textHorario" fx:id="txtHorarioTrabalho" text="Horário de Trabalho">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textPromocoes" fx:id="txtPromocoes" text="Promoções">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="178.0" prefWidth="1141.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textAcidentes" fx:id="txtAcidente" text="Acidentes de Trabalho">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                          <Tab id="textAdvertencias" fx:id="txtAdvertencias" text="Advertências">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                          </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+                  <SplitMenuButton layoutX="5.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="FILTRAR" textFill="#4807c0">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                  </SplitMenuButton>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+            <Tab text="Atualização">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="985.0" prefWidth="1133.0" style="-fx-background-color: c3d5db;">
+                     <children>
+                        <SplitMenuButton alignment="TOP_LEFT" layoutX="6.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="ATUALIZAR" textFill="#4807c0">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Action 1" />
+                            <MenuItem mnemonicParsing="false" text="Action 2" />
+                          </items>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </SplitMenuButton>
+                        <TabPane layoutY="55.0" prefHeight="775.0" prefWidth="1238.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="Dados Pessoais">
+                              <content>
+                                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="284.0" prefWidth="1215.0">
+                                       <children>
+                                          <TabPane layoutX="4.0" layoutY="2.0" prefHeight="305.0" prefWidth="1221.0" tabClosingPolicy="UNAVAILABLE">
+                                            <tabs>
+                                                <Tab disable="true" text="ID">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                              <Tab disable="true" text="Nome">
+                                                <content>
+                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                </content>
+                                              </Tab>
+                                              <Tab disable="true" text="Data Nacimento">
+                                                <content>
+                                                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="532.0" prefWidth="1221.0" />
+                                                </content>
+                                              </Tab>
+                                                <Tab text="Sexo">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Estado Civil">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="276.0" prefWidth="1243.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Conjuge">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Dependentes">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab disable="true" text="Nacionalidade">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="392.0" prefWidth="1221.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab disable="true" text="Naturalidade">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab disable="true" text="CPF">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab disable="true" text="RG">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Endereço">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Telefone">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Email">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab disable="true" text="Filiação">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab disable="true" text="Tipo Sanguineo">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Contato de Emergência">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                            </tabs>
+                                          </TabPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Dados Profissionais">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="708.0" prefWidth="1299.0">
+                                       <children>
+                                          <TabPane layoutX="2.0" layoutY="2.0" prefHeight="696.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE">
+                                            <tabs>
+                                              <Tab text="Cargo">
+                                                <content>
+                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                </content>
+                                              </Tab>
+                                              <Tab text="Departamento">
+                                                <content>
+                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                </content>
+                                              </Tab>
+                                                <Tab text="Função">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Máquinas que opera">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab disable="true" text="Data de Admissão">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Salário">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Dados Bancários">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Benefícios">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="629.0" prefWidth="1209.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Escolaridade">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab disable="true" text="CTPS">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab disable="true" text="PIS/Pasep">
+                                                  <content>
+                                                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="667.0" prefWidth="1235.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Contrato de Trabalho">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Horário de Trabalho">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Acidente Trab.">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Advertências">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                  </content>
+                                                </Tab>
+                                            </tabs>
+                                          </TabPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>
