@@ -862,7 +862,7 @@ public void atualizarDadoProfissional() {
             try (Connection conn_1 = Database.getConnection();
             PreparedStatement stmt_1 = conn_1.prepareStatement("DELETE FROM dadosprofissionais WHERE dados_pessoais = ?");
             Connection conn = Database.getConnection();
-                 PreparedStatement stmt = conn.prepareStatement("DELETE FROM dadospessoais WHERE cpf = ?");
+                 PreparedStatement stmt = conn.prepareStatement("DELETE FROM dadospessoais WHERE id = ?");
                  ) {
                 
                 stmt_1.setString(1, dadoProfissionalSelecionado.getDados_pessoais());
