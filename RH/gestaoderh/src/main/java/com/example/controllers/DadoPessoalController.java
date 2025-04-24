@@ -408,7 +408,6 @@ public class DadoPessoalController {
         });
     }
     
-
  
 private void preencherMultiplosCampos(DadoPessoal dadopessoalSelecionado) {
     if (dadopessoalSelecionado == null) return;
@@ -425,14 +424,7 @@ private void preencherMultiplosCampos(DadoPessoal dadopessoalSelecionado) {
     } else {
         System.err.println("ERRO AO CARREGAR!");
     }
-}
-
-
-    
-    
-    
-    
-    ;
+};
 
     
 @FXML
