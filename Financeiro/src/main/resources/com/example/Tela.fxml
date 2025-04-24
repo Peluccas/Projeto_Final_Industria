@@ -31,7 +31,6 @@
                      </columns>
                   </TableView>
                   <Button layoutX="920.0" layoutY="39.0" mnemonicParsing="false" onAction="#adicionarFluxo" prefHeight="25.0" prefWidth="332.0" text="Adicionar" />
-                  <TextField fx:id="txtData" layoutX="98.0" layoutY="10.0" prefHeight="25.0" prefWidth="151.0" promptText="AAAA-MM-DD" />
                   <Label layoutX="6.0" layoutY="14.0" text="Data Transação:" />
                   <Label layoutX="59.0" layoutY="43.0" text="Setor:" />
                   <Label layoutX="267.0" layoutY="14.0" text="Descrição:" />
@@ -42,12 +41,13 @@
                   <Label layoutX="453.0" layoutY="43.0" text="Forma Pagamento:" />
                   <Label layoutX="679.0" layoutY="43.0" text="Vencimento:" />
                   <Label layoutX="907.0" layoutY="14.0" text="Status:" />
-                  <TextField fx:id="txtVencimento" layoutX="749.0" layoutY="39.0" prefHeight="25.0" prefWidth="149.0" promptText="AAAA-MM-DD" />
                   <ChoiceBox fx:id="cmbCategoria" layoutX="749.0" layoutY="10.0" prefHeight="25.0" prefWidth="149.0" />
                   <ChoiceBox fx:id="cmbStatus" layoutX="949.0" layoutY="10.0" prefHeight="25.0" prefWidth="156.0" />
-                  <ChoiceBox fx:id="cmbSetor" layoutX="99.0" layoutY="39.0" prefHeight="25.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="cmbSetor" layoutX="94.0" layoutY="39.0" prefHeight="25.0" prefWidth="162.0" />
                   <ChoiceBox fx:id="cmbPagto" layoutX="559.0" layoutY="39.0" prefHeight="25.0" prefWidth="110.0" />
                   <Button layoutX="1122.0" layoutY="10.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="25.0" prefWidth="129.0" text="Limpar Campos" />
+                  <DatePicker fx:id="DataTransacao" layoutX="95.0" layoutY="10.0" prefHeight="25.0" prefWidth="159.0" />
+                  <DatePicker fx:id="DataVencimento" layoutX="749.0" layoutY="39.0" prefHeight="25.0" prefWidth="150.0" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -56,7 +56,6 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="470.0" prefWidth="774.0">
                <children>
                   <Button layoutX="416.0" layoutY="325.0" mnemonicParsing="false" onAction="#atualizarFluxo" prefHeight="25.0" prefWidth="394.0" text="Atualizar" />
-                  <TextField fx:id="txtDataAtualizar" layoutX="196.0" layoutY="61.0" prefHeight="25.0" prefWidth="337.0" promptText="Data Transação" />
                   <Label layoutX="100.0" layoutY="65.0" text="Data Transação:" />
                   <Label layoutX="154.0" layoutY="119.0" text="Setor:" />
                   <Label layoutX="127.0" layoutY="170.0" text="Descrição:" />
@@ -67,12 +66,13 @@
                   <Label layoutX="622.0" layoutY="111.0" text="Forma Pagamento:" />
                   <Label layoutX="655.0" layoutY="162.0" text="Vencimento:" />
                   <Label layoutX="689.0" layoutY="210.0" text="Status:" />
-                  <TextField fx:id="txtVencimentoAtualizar" layoutX="730.0" layoutY="158.0" prefHeight="25.0" prefWidth="296.0" promptText="Vencimento" />
                   <ChoiceBox fx:id="cmbCategoriaAtualizar" layoutX="725.0" layoutY="61.0" prefHeight="25.0" prefWidth="296.0" />
                   <ChoiceBox fx:id="cmbPagtoAtualizar" layoutX="727.0" layoutY="107.0" prefHeight="25.0" prefWidth="295.0" />
                   <Button layoutX="416.0" layoutY="374.0" mnemonicParsing="false" onAction="#excluirFluxo" prefHeight="25.0" prefWidth="395.0" text="Excluir" />
                   <ComboBox fx:id="cmbSetorAtualizar" layoutX="198.0" layoutY="116.0" prefHeight="25.0" prefWidth="337.0" />
                   <ComboBox fx:id="cmbStatusAtualizar" layoutX="727.0" layoutY="206.0" prefHeight="25.0" prefWidth="301.0" />
+                  <DatePicker fx:id="DataTransacaoAtualizar" layoutX="195.0" layoutY="61.0" prefHeight="25.0" prefWidth="340.0" />
+                  <DatePicker fx:id="DataVencimentoAtualizar" layoutX="727.0" layoutY="158.0" prefHeight="25.0" prefWidth="299.0" />
                </children>
             </AnchorPane>
          </content>
@@ -121,6 +121,7 @@
                   <Label layoutX="711.0" layoutY="28.0" text="Status:" />
                   <Button layoutX="926.0" layoutY="24.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Confirmar Pagamento" />
                   <DatePicker fx:id="filtroPagto" layoutX="133.0" layoutY="24.0" />
+                  <Button layoutX="1092.0" layoutY="24.0" mnemonicParsing="false" onAction="#limparCampos1" prefHeight="25.0" prefWidth="129.0" text="Limpar Campos" />
                </children>
             </AnchorPane>
         </content>
@@ -146,6 +147,7 @@
                   <DatePicker fx:id="dataInicio" layoutX="101.0" layoutY="30.0" />
                   <Label layoutX="288.0" layoutY="34.0" text="Data Fim:" />
                   <DatePicker fx:id="dataFim" layoutX="345.0" layoutY="30.0" />
+                  <Button layoutX="1122.0" layoutY="30.0" mnemonicParsing="false" onAction="#limparCampos2" prefHeight="25.0" prefWidth="129.0" text="Limpar Campos" />
                </children>
             </AnchorPane>
         </content>

@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -14,13 +15,13 @@ import java.sql.*;
 import java.time.LocalDate;
 
 public class FluxoController {
-    @FXML private TextField txtData;
+    @FXML private DatePicker DataTransacao;
     @FXML private ChoiceBox<String> cmbSetor;
     @FXML private TextField txtDescricao;
     @FXML private TextField txtValor;
     @FXML private ChoiceBox<String> cmbCategoria;
     @FXML private ChoiceBox<String> cmbPagto;
-    @FXML private TextField txtVencimento; 
+    @FXML private DatePicker DataVencimento; 
     @FXML private ChoiceBox<String> cmbStatus;
     @FXML private TableView<Fluxo> tableFluxo;
 
@@ -58,7 +59,7 @@ public class FluxoController {
     @FXML private TableColumn<PagFuncionarios, Double> colPagSalario;
     @FXML private TableColumn<PagFuncionarios, Double> colPagDescontos;
     @FXML private TableColumn<PagFuncionarios, Double> colPagLiquido;
-    @FXML private TableColumn<PagFuncionarios, Boolean> colPagStatus;
+    @FXML private TableColumn<PagFuncionarios, String> colPagStatus;
     @FXML private TextField txtFuncionarioPagto;
     @FXML private ComboBox<String> cmbStatusPagto;
     @FXML private DatePicker filtroPagto;
@@ -81,13 +82,13 @@ public class FluxoController {
     @FXML private DatePicker dataFim;
 
     //Campos para atualização
-    @FXML private TextField txtDataAtualizar;
+    @FXML private DatePicker DataTransacaoAtualizar;
     @FXML private ComboBox<String> cmbSetorAtualizar;
     @FXML private TextField txtDescricaoAtualizar;
     @FXML private TextField txtValorAtualizar;
     @FXML private ChoiceBox<String> cmbCategoriaAtualizar;
     @FXML private ChoiceBox<String> cmbPagtoAtualizar;
-    @FXML private TextField txtVencimentoAtualizar; 
+    @FXML private DatePicker DataVencimentoAtualizar; 
     @FXML private ComboBox<String> cmbStatusAtualizar;
 
     //import dos filtros
@@ -117,11 +118,12 @@ public class FluxoController {
 
         @FXML
         private void adicionarFluxo() {
-            String data = String.valueOf(txtData.getText());
+
+           LocalDate dataTran = DataTransacao.getValue();
+           LocalDate dataVen = DataVencimento.getValue();
             String setor = String.valueOf(cmbSetor.getValue());
             String descricao = txtDescricao.getText();
             double valor = Double.parseDouble(txtValor.getText());
-            String vencimento = String.valueOf(txtVencimento.getText()); 
             String status = String.valueOf(cmbStatus.getValue());
             Boolean status_validado;
             Integer setor_validado = null;
@@ -131,7 +133,7 @@ public class FluxoController {
             }else{
                 status_validado = false;
             }
-                   
+
               
             if ("RH".equals(setor)) {
                 setor_validado = 1;
@@ -152,18 +154,17 @@ public class FluxoController {
                 System.out.println("Erro: setor não selecionado ou inválido!");
                 return; 
             }
-        
-            
+      
             try (Connection conn = Database.getConnection();
                  PreparedStatement stmt = conn.prepareStatement("INSERT INTO fluxo (data_transacao, fk_setor, descricao, valor, categoria, forma_pagto, vencimento, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
                 
-                stmt.setString(1, data);
+                stmt.setDate(1, dataTran != null ? java.sql.Date.valueOf(dataTran) : null);
                 stmt.setInt(2, setor_validado);
                 stmt.setString(3, descricao);
                 stmt.setDouble(4, valor);
                 stmt.setString(5, cmbCategoria.getValue());
                 stmt.setString(6, cmbPagto.getValue());
-                stmt.setString(7, vencimento);
+                stmt.setDate(7, dataVen != null ? java.sql.Date.valueOf(dataVen) : null);
                 stmt.setBoolean(8, status_validado);
                 
                 stmt.executeUpdate();
@@ -178,11 +179,11 @@ public class FluxoController {
 
     @FXML
     private void atualizarFluxo() {
-        String data = String.valueOf(txtDataAtualizar.getText());
+        LocalDate dataTran = DataTransacao.getValue();
+        LocalDate dataVen = DataVencimento.getValue();
         String setor = String.valueOf(cmbSetorAtualizar.getValue());
         String descricao = txtDescricaoAtualizar.getText();
         double valor = Double.parseDouble(txtValorAtualizar.getText());
-        String vencimento = String.valueOf(txtVencimentoAtualizar.getText());
         String status = String.valueOf(cmbStatusAtualizar.getValue());
         Boolean status_validado;
         Integer setor_validado = null;
@@ -217,13 +218,13 @@ public class FluxoController {
         try (Connection conn = Database.getConnection();
         PreparedStatement stmt = conn.prepareStatement("UPDATE fluxo SET data_transacao = ?, fk_setor = ?, descricao = ?, valor = ?, categoria = ?, forma_pagto = ?, vencimento = ?, status = ? WHERE id_fluxo = ?")) {
         
-            stmt.setString(1, data);
+            stmt.setDate(1, dataTran != null ? java.sql.Date.valueOf(dataTran) : null);
             stmt.setInt(2, setor_validado);
             stmt.setString(3, descricao);
             stmt.setDouble(4, valor);
             stmt.setString(5, cmbCategoriaAtualizar.getValue());
             stmt.setString(6, cmbPagtoAtualizar.getValue());
-            stmt.setString(7, vencimento);
+            stmt.setDate(7, dataVen != null ? java.sql.Date.valueOf(dataVen) : null);
             stmt.setBoolean(8, status_validado);
             stmt.setInt(9, fluxoSelecionado.getId());
             stmt.executeUpdate();
@@ -267,13 +268,13 @@ public class FluxoController {
                 while (rs.next()) {
                     listaFluxo.add(new 
                     Fluxo(rs.getInt("id_fluxo"), 
-                    rs.getString("data_transacao"), 
+                    rs.getDate("data_transacao"), 
                     rs.getString("nome_setor"), 
                     rs.getString("descricao"), 
                     rs.getDouble("valor"), 
                     rs.getString("categoria"), 
                     rs.getString("forma_pagto"), 
-                    rs.getString("vencimento"), 
+                    rs.getDate("vencimento"), 
                     rs.getBoolean("status")));
                 }
                 tableFluxo.setItems(listaFluxo);  
@@ -291,13 +292,13 @@ public class FluxoController {
                 while (rs.next()) {
                     listaRelatorio.add(new 
                     Fluxo(rs.getInt("id_fluxo"),
-                     rs.getString("data_transacao"),
+                     rs.getDate("data_transacao"),
                      rs.getString("nome_setor"),
                      rs.getString("descricao"), 
                      rs.getDouble("valor"), 
                        rs.getString("categoria"), 
                        rs.getString("forma_pagto"),
-                        rs.getString("vencimento"), 
+                        rs.getDate("vencimento"), 
                         rs.getBoolean("status")));
                 }
                 tableRelatorio.setItems(listaRelatorio);  
@@ -307,34 +308,48 @@ public class FluxoController {
     }
 
     
-     private void preencherCamposAtualizacao() {
+    private void preencherCamposAtualizacao() {
         Fluxo fluxoSelecionado = tableFluxo.getSelectionModel().getSelectedItem();
-        if (fluxoSelecionado != null){
-            txtDataAtualizar.setText(fluxoSelecionado.getData_transacao());
-            cmbSetorAtualizar.setValue(String.valueOf(fluxoSelecionado.getFk_setor()));
+        if (fluxoSelecionado != null) {
+            DataTransacaoAtualizar.setValue(fluxoSelecionado.getData_transacao().toLocalDate());
+            cmbSetorAtualizar.setValue(fluxoSelecionado.getFk_setor());
             txtDescricaoAtualizar.setText(fluxoSelecionado.getDescricao());
             txtValorAtualizar.setText(String.valueOf(fluxoSelecionado.getValor()));
             cmbCategoriaAtualizar.setValue(fluxoSelecionado.getCategoria());
             cmbPagtoAtualizar.setValue(fluxoSelecionado.getForma_pagto());
-            txtVencimentoAtualizar.setText((fluxoSelecionado.getVencimento()));
+            DataVencimentoAtualizar.setValue(fluxoSelecionado.getVencimento().toLocalDate());
             cmbStatusAtualizar.setValue(String.valueOf(fluxoSelecionado.getStatus()));
-             
-         tabPane.getSelectionModel().select(tabAtualizar);
-
+            tabPane.getSelectionModel().select(tabAtualizar);
         }
+       
     }
     
 
     public void limparCampos() {
-        txtData.clear();
+        DataTransacao.setValue(null);
         cmbSetor.setValue(null);
         txtDescricao.clear();
         txtValor.clear();
         cmbCategoria.setValue(null);
         cmbPagto.setValue(null);
-        txtVencimento.clear();
+        DataVencimento.setValue(null);
         cmbStatus.setValue(null);
     }
+
+    public void limparCampos1() {
+        filtroPagto.setValue(null);
+        txtFuncionarioPagto.clear();
+        cmbStatusPagto.setValue(null);
+    }
+
+    public void limparCampos2() {
+        dataInicio.setValue(null);
+        dataFim.setValue(null);
+    }
+
+
+
+
 
     @FXML
     private void listaSolicitacoes(){
@@ -444,13 +459,13 @@ public class FluxoController {
                while (rs.next()) {
                    listaRelatorio.add(new Fluxo(
                        rs.getInt("id_fluxo"),
-                       rs.getString("data_transacao"),
+                       rs.getDate("data_transacao"),
                        rs.getString("nome_setor"),
                        rs.getString("descricao"),
                        rs.getDouble("valor"),
                        rs.getString("categoria"),
                        rs.getString("forma_pagto"),
-                       rs.getString("vencimento"),
+                       rs.getDate("vencimento"),
                        rs.getBoolean("status")
                    ));
                }
@@ -531,10 +546,10 @@ public class FluxoController {
         colFluCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
         colFluPagto.setCellValueFactory(new PropertyValueFactory<>("forma_pagto"));
         colFluVencimento.setCellValueFactory(new PropertyValueFactory<>("vencimento"));
-        colFluStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
-
-     
-
+        colFluStatus.setCellValueFactory(cellData -> {boolean status = cellData.getValue().getStatus(); 
+        String statusFormatado = status ? "Concluído" : "Pendente";
+        return new ReadOnlyStringWrapper(statusFormatado);
+        }); 
 
         tableFluxo.setOnMouseClicked((MouseEvent event) -> {
             if (event.getClickCount() > 1) {
@@ -564,7 +579,10 @@ public class FluxoController {
         colPagSalario.setCellValueFactory(new PropertyValueFactory<>("salario_base"));
         colPagDescontos.setCellValueFactory(new PropertyValueFactory<>("descontos"));
         colPagLiquido.setCellValueFactory(new PropertyValueFactory<>("valor_liquido"));
-        colPagStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colPagStatus.setCellValueFactory(cellData -> {boolean status = cellData.getValue().getStatus(); // ou isStatus(), depende da sua classe
+            String statusFormatado = status ? "Concluído" : "Pendente";
+            return new ReadOnlyStringWrapper(statusFormatado);
+        });
 
         tableFluxo.setOnMouseClicked((MouseEvent event) -> {
             if (event.getClickCount() > 1) {
@@ -580,7 +598,11 @@ public class FluxoController {
         colReCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
         colReForma.setCellValueFactory(new PropertyValueFactory<>("forma_pagto"));
         colReVencimento.setCellValueFactory(new PropertyValueFactory<>("vencimento"));
-        colReStatus.setCellValueFactory(new PropertyValueFactory<>("status")); 
+        colReStatus.setCellValueFactory(cellData -> {
+            boolean status = cellData.getValue().getStatus(); // ou isStatus(), depende da sua classe
+            String statusFormatado = status ? "Concluído" : "Pendente";
+            return new ReadOnlyStringWrapper(statusFormatado);
+        });
         
 
         listaFuncionarios();

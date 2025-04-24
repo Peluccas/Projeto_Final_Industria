@@ -1,20 +1,21 @@
 package com.example.models;
 
+import java.sql.Date;
 
 public class Fluxo{
     private int id;
-    private String data_transacao;
+    private Date data_transacao;
     private String fk_setor;
     private String descricao;
     private double valor;
     private String categoria;
     private String forma_pagto;
-    private String vencimento;
+    private Date vencimento;
     private boolean status;
   
 
 
-public Fluxo(int id, String data_transacao, String fk_setor, String descricao, double valor, String categoria, String forma_pagto, String vencimento, boolean status){
+public Fluxo(int id, Date data_transacao, String fk_setor, String descricao, double valor, String categoria, String forma_pagto, Date vencimento, boolean status){
     this.id = id;
     this.data_transacao = data_transacao;
     this.fk_setor = fk_setor;
@@ -35,11 +36,11 @@ public void setId(int id){
     this.id = id;
 }
 
-public String getData_transacao(){
+public Date getData_transacao(){
     return data_transacao;
 }
 
-public void setData_transacao(String data_transacao){
+public void setData_transacao(Date data_transacao){
     this.data_transacao = data_transacao;
 }
 
@@ -83,11 +84,11 @@ public void setForma_pagto(String forma_pagto) {
     this.forma_pagto = forma_pagto;
 }
 
-public String getVencimento(){
+public Date getVencimento(){
     return vencimento;
 }
 
-public void setVencimento(String vencimento){
+public void setVencimento(Date vencimento){
     this.vencimento = vencimento;
 }
 
