@@ -13,11 +13,11 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
 
         //Caminho para o arquivo FXML
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/example/"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/example/TelaLogin.fxml"));
         Parent root = loader.load();
         //Gera o titulo da Página e o Icone
-        stage.setTitle("");
-        Image image = new Image(this.getClass().getResource("/com/example/").toExternalForm());
+        stage.setTitle("Flip Niquel");
+        Image image = new Image(this.getClass().getResource("/com/example/logoFabrica.png").toExternalForm());
         stage.getIcons().add(image);
         stage.setScene(new Scene(root));
         stage.show();

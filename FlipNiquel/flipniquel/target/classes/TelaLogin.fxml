@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="PaneLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.UsuarioController"> 
+   <children>
+      <Label layoutX="100.0" layoutY="37.0" prefHeight="46.0" prefWidth="400.0" text="Bem vindo ao Sistema de Gestão Flip Niquel">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logoFabrica.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <TextField fx:id="txtUsuario" layoutX="226.0" layoutY="129.0" promptText="Usuário" />
+      <ComboBox fx:id="cmbSetorLogin" layoutX="224.0" layoutY="259.0" prefWidth="150.0" promptText="Setor" />
+      <Button layoutX="226.0" layoutY="314.0" mnemonicParsing="false" onAction="#Logar" prefHeight="25.0" prefWidth="73.0" text="Logar" />
+      <Label layoutX="226.0" layoutY="100.0" text="Usuário">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@UserIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <Label layoutX="228.0" layoutY="169.0" text="Senha">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@PasswordIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <Label layoutX="224.0" layoutY="234.0" text="Selecione o seu Setor" />
+      <PasswordField fx:id="passSenha" layoutX="226.0" layoutY="200.0" promptText="Senha" />
+   </children>
+</Pane>
