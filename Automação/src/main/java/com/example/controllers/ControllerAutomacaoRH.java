@@ -43,6 +43,7 @@ public class ControllerAutomacaoRH {
     @FXML private TextField filtroResponsavelAut;
     @FXML private TextField filtroLocalizacaoAut;
     @FXML private TextField filtroOperacaoAut;
+    @FXML private ComboBox<String> cmbFiltrarSituacao;
     @FXML private Button btnLimparFiltro;
 
 
@@ -66,7 +67,7 @@ public class ControllerAutomacaoRH {
     private ObservableList<AutomacaoRH> listaAutomacaoRH = FXCollections.observableArrayList();
 
     @FXML
-    private void salvarAutomacaoRH() {
+    public void salvarAutomacaoRH() {
   
        
 
@@ -113,10 +114,10 @@ public class ControllerAutomacaoRH {
         colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         
 
-
+        cmbFiltrarSituacao.getItems().addAll("1-ativo", "2-inativo");
         cmbAtuCategoria.getItems().addAll( "Recrutamento e Seleção", "Treinamento e Desenvolvimento", "Comunicação Interna");
         cmbAtuPrioridade.getItems().addAll("Baixa","Média","Alta");
-        cmbAtuSituacao.getItems().addAll("ativo", "inativo");
+        cmbAtuSituacao.getItems().addAll("1-ativo", "2-inativo");
         cmbCategoria.getItems().addAll( "Recrutamento e Seleção", "Treinamento e Desenvolvimento", "Comunicação Interna");
         cmbPrioridade.getItems().addAll("Baixa","Média","Alta");
         cmbSituacao.getItems().addAll("ativo", "inativo");
@@ -130,7 +131,7 @@ public class ControllerAutomacaoRH {
             }
         });
     }
-    private void preencherCamposAtualizacao() {
+    public void preencherCamposAtualizacao() {
         AutomacaoRH automacaoSelecionada = tablesAutomacaoRH.getSelectionModel().getSelectedItem();
         if (automacaoSelecionada != null) {
             txtAtuNomeDaAutomacao.setText(automacaoSelecionada.getNomeAutomacao());
@@ -181,7 +182,7 @@ public void atualizarAutomacao() {
 }
 
     @FXML
-    private void carregarAutomacaoRH() {
+    public void carregarAutomacaoRH() {
         listaAutomacaoRH.clear();
         try (Connection conn = Database.getConnection();
              Statement stmt = conn.createStatement();
@@ -197,7 +198,7 @@ public void atualizarAutomacao() {
     }
 //função para filtrar os produtos
    @FXML
-    private void filtrarAutomacao() {
+    public void filtrarAutomacao() {
         FilteredList<AutomacaoRH> dadosFiltrados = new FilteredList<>(listaAutomacaoRH, p -> true);
 
         dadosFiltrados.setPredicate(produto -> {
@@ -213,9 +214,13 @@ public void atualizarAutomacao() {
             if (!filtroLocalizacaoAut.getText().isEmpty() && !produto.getLocalizacao().toLowerCase().contains(filtroLocalizacaoAut.getText().toLowerCase())) {
                 return false;
             }
-            if (!filtroResponsavelAut.getText().isEmpty() && !produto.getLocalizacao().toLowerCase().contains(filtroResponsavelAut.getText().toLowerCase())) {
+            if (!filtroResponsavelAut.getText().isEmpty() && !produto.getResponsavel().toLowerCase().contains(filtroResponsavelAut.getText().toLowerCase())) {
                 return false;
             }
+            if (cmbFiltrarSituacao.getValue() != null && !cmbFiltrarSituacao.getValue().isEmpty() && !produto.getSituacao().toLowerCase().contains(cmbFiltrarSituacao.getValue().toLowerCase())) {
+                return false;
+            }
+         
             return true;
         });
 
@@ -223,12 +228,13 @@ public void atualizarAutomacao() {
     }
 
     @FXML
-    private void limparFiltro() {
+    public void limparFiltro() {
         filtroNomeAut.clear();
         filtroResponsavelAut.clear();
         filtroSetorAut.clear();
         filtroLocalizacaoAut.clear();
         filtroOperacaoAut.clear();
+        cmbFiltrarSituacao.setValue(null);
         tablesAutomacaoRH.setItems(listaAutomacaoRH);
     }
 
@@ -236,7 +242,7 @@ public void atualizarAutomacao() {
 
 
 
-private void limparCadastro() {
+public void limparCadastro() {
         txtNomeDaAutomacao.clear();
         txtResponsavel.clear();
         txtSetor.clear();
@@ -282,7 +288,7 @@ public void deleteArh() {
     }
 }
 
-    private void mostrarAlerta(AlertType tipo, String titulo, String mensagem) {
+    public void mostrarAlerta(AlertType tipo, String titulo, String mensagem) {
     Platform.runLater(() -> {
         Alert alerta = new Alert(tipo);
         alerta.setTitle(titulo);
