@@ -9,6 +9,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 
 import java.sql.*;
@@ -408,6 +409,7 @@ public class DadoPessoalController {
         });
     }
     
+
  
 private void preencherMultiplosCampos(DadoPessoal dadopessoalSelecionado) {
     if (dadopessoalSelecionado == null) return;
@@ -424,7 +426,14 @@ private void preencherMultiplosCampos(DadoPessoal dadopessoalSelecionado) {
     } else {
         System.err.println("ERRO AO CARREGAR!");
     }
-};
+}
+
+
+    
+    
+    
+    
+    ;
 
     
 @FXML
@@ -862,7 +871,7 @@ public void atualizarDadoProfissional() {
             try (Connection conn_1 = Database.getConnection();
             PreparedStatement stmt_1 = conn_1.prepareStatement("DELETE FROM dadosprofissionais WHERE dados_pessoais = ?");
             Connection conn = Database.getConnection();
-                 PreparedStatement stmt = conn.prepareStatement("DELETE FROM dadospessoais WHERE id = ?");
+                 PreparedStatement stmt = conn.prepareStatement("DELETE FROM dadospessoais WHERE cpf = ?");
                  ) {
                 
                 stmt_1.setString(1, dadoProfissionalSelecionado.getDados_pessoais());
