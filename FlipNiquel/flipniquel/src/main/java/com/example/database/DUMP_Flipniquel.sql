@@ -1,0 +1,45 @@
+CREATE DATABASE Industria_db;
+USE Industria_db;
+
+
+CREATE TABLE usuarioRH(
+    id SERIAL PRIMARY KEY NOT NULL,
+    usuario VARCHAR(100) NOT NULL,
+    senha VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE usuarioFinanciero(
+    id SERIAL PRIMARY KEY NOT NULL,
+    usuario VARCHAR(100) NOT NULL,
+    senha VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE usuarioProducao(
+    id SERIAL PRIMARY KEY NOT NULL,
+    usuario VARCHAR(100) NOT NULL,
+    senha VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE usuarioEstoque(
+    id SERIAL PRIMARY KEY NOT NULL,
+    usuario VARCHAR(100) NOT NULL,
+    senha VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE usuarioQA(
+    id SERIAL PRIMARY KEY NOT NULL,
+    usuario VARCHAR(100) NOT NULL,
+    senha VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE usuarioAutomacao(
+    id SERIAL PRIMARY KEY NOT NULL,
+    usuario VARCHAR(100) NOT NULL,
+    senha VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE usuarioMaquinario(
+    id SERIAL PRIMARY KEY NOT NULL,
+    usuario VARCHAR(100) NOT NULL,
+    senha VARCHAR(100) NOT NULL
+);
