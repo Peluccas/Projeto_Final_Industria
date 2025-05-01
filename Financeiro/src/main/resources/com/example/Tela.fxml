@@ -10,13 +10,15 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1265.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.FluxoController">
+<TabPane fx:id="tabPane" prefHeight="776.0" prefWidth="1265.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.FluxoController">
   <tabs>
     <Tab fx:id="tabFluxo" text="Gestão de Caixa">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="470.0" prefWidth="774.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="755.0" prefWidth="1300.0">
                <children>
                   <TableView fx:id="tableFluxo" layoutX="19.0" layoutY="88.0" prefHeight="582.0" prefWidth="1225.0">
                      <columns>
@@ -30,7 +32,14 @@
                         <TableColumn fx:id="colFluStatus" prefWidth="124.0" text="Status" />
                      </columns>
                   </TableView>
-                  <Button layoutX="920.0" layoutY="39.0" mnemonicParsing="false" onAction="#adicionarFluxo" prefHeight="25.0" prefWidth="332.0" text="Adicionar" />
+                  <Button layoutX="920.0" layoutY="39.0" mnemonicParsing="false" onAction="#adicionarFluxo" prefHeight="25.0" prefWidth="332.0" text="Adicionar">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@add_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <Label layoutX="6.0" layoutY="14.0" text="Data Transação:" />
                   <Label layoutX="59.0" layoutY="43.0" text="Setor:" />
                   <Label layoutX="267.0" layoutY="14.0" text="Descrição:" />
@@ -45,17 +54,38 @@
                   <ChoiceBox fx:id="cmbStatus" layoutX="949.0" layoutY="10.0" prefHeight="25.0" prefWidth="156.0" />
                   <ChoiceBox fx:id="cmbSetor" layoutX="94.0" layoutY="39.0" prefHeight="25.0" prefWidth="162.0" />
                   <ChoiceBox fx:id="cmbPagto" layoutX="559.0" layoutY="39.0" prefHeight="25.0" prefWidth="110.0" />
-                  <Button layoutX="1122.0" layoutY="10.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="25.0" prefWidth="129.0" text="Limpar Campos" />
+                  <Button layoutX="1122.0" layoutY="10.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="25.0" prefWidth="129.0" text="Limpar Campos">
+                     <graphic>
+                        <ImageView fitHeight="12.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@close_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <DatePicker fx:id="DataTransacao" layoutX="95.0" layoutY="10.0" prefHeight="25.0" prefWidth="159.0" />
                   <DatePicker fx:id="DataVencimento" layoutX="749.0" layoutY="39.0" prefHeight="25.0" prefWidth="150.0" />
                </children></AnchorPane>
       </content>
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@question_exchange_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+               </image>
+            </ImageView>
+         </graphic>
     </Tab>
       <Tab fx:id="tabAtualizar" text="Atualizar Caixa">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="470.0" prefWidth="774.0">
                <children>
-                  <Button layoutX="416.0" layoutY="325.0" mnemonicParsing="false" onAction="#atualizarFluxo" prefHeight="25.0" prefWidth="394.0" text="Atualizar" />
+                  <Button layoutX="416.0" layoutY="325.0" mnemonicParsing="false" onAction="#atualizarFluxo" prefHeight="25.0" prefWidth="394.0" text="Atualizar">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@refresh_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <Label layoutX="100.0" layoutY="65.0" text="Data Transação:" />
                   <Label layoutX="154.0" layoutY="119.0" text="Setor:" />
                   <Label layoutX="127.0" layoutY="170.0" text="Descrição:" />
@@ -68,14 +98,37 @@
                   <Label layoutX="689.0" layoutY="210.0" text="Status:" />
                   <ChoiceBox fx:id="cmbCategoriaAtualizar" layoutX="725.0" layoutY="61.0" prefHeight="25.0" prefWidth="296.0" />
                   <ChoiceBox fx:id="cmbPagtoAtualizar" layoutX="727.0" layoutY="107.0" prefHeight="25.0" prefWidth="295.0" />
-                  <Button layoutX="416.0" layoutY="374.0" mnemonicParsing="false" onAction="#excluirFluxo" prefHeight="25.0" prefWidth="395.0" text="Excluir" />
+                  <Button layoutX="416.0" layoutY="367.0" mnemonicParsing="false" onAction="#excluirFluxo" prefHeight="25.0" prefWidth="395.0" text="Excluir">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@delete_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <ComboBox fx:id="cmbSetorAtualizar" layoutX="198.0" layoutY="116.0" prefHeight="25.0" prefWidth="337.0" />
                   <ComboBox fx:id="cmbStatusAtualizar" layoutX="727.0" layoutY="206.0" prefHeight="25.0" prefWidth="301.0" />
                   <DatePicker fx:id="DataTransacaoAtualizar" layoutX="195.0" layoutY="61.0" prefHeight="25.0" prefWidth="340.0" />
                   <DatePicker fx:id="DataVencimentoAtualizar" layoutX="727.0" layoutY="158.0" prefHeight="25.0" prefWidth="299.0" />
+                  <Button layoutX="414.0" layoutY="415.0" mnemonicParsing="false" onAction="#limparCampos3" prefHeight="25.0" prefWidth="400.0" text="Limpar Campos">
+                     <graphic>
+                        <ImageView fitHeight="14.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@close_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
          </content>
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@refresh_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Tab>
       <Tab fx:id="tabSolicitacoes" text="Solicitações">
         <content>
@@ -92,11 +145,32 @@
                         <TableColumn fx:id="colSoStatus" prefWidth="146.0" text="Status" />
                      </columns>
                   </TableView>
-                  <Button layoutX="89.0" layoutY="661.0" mnemonicParsing="false" onAction="#aceitar" prefHeight="25.0" prefWidth="519.0" text="Aceitar" />
-                  <Button layoutX="662.0" layoutY="661.0" mnemonicParsing="false" onAction="#recusar" prefHeight="25.0" prefWidth="518.0" text="Recusar" />
+                  <Button layoutX="89.0" layoutY="661.0" mnemonicParsing="false" onAction="#aceitar" prefHeight="25.0" prefWidth="519.0" text="Aceitar">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@check_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button layoutX="662.0" layoutY="661.0" mnemonicParsing="false" onAction="#recusar" prefHeight="25.0" prefWidth="518.0" text="Recusar">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@close_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
             </AnchorPane>
         </content>
+         <graphic>
+            <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@live_help_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Tab>
       <Tab fx:id="tabPagFuncionarios" text="Pagamento Funcionários">
         <content>
@@ -113,18 +187,46 @@
                         <TableColumn fx:id="colPagStatus" prefWidth="157.0" text="Status" />
                      </columns>
                   </TableView>
-                  <Button fx:id="btnPesquisar" layoutX="313.0" layoutY="24.0" mnemonicParsing="false" text="Pesquisar" />
+                  <Button fx:id="btnPesquisar" layoutX="313.0" layoutY="24.0" mnemonicParsing="false" onAction="#filtroTabPagto" text="Pesquisar">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@search_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <Label layoutX="35.0" layoutY="28.0" text="Data Pagamento:" />
-                  <TextField fx:id="txtFuncionarioPagto" layoutX="472.0" layoutY="24.0" prefHeight="25.0" prefWidth="215.0" />
+                  <TextField fx:id="txtFuncionarioPagto" layoutX="483.0" layoutY="24.0" prefHeight="25.0" prefWidth="215.0" />
                   <ComboBox fx:id="cmbStatusPagto" layoutX="753.0" layoutY="24.0" prefWidth="150.0" />
-                  <Label layoutX="401.0" layoutY="28.0" text="Funcionário:" />
+                  <Label layoutX="412.0" layoutY="28.0" text="Funcionário:" />
                   <Label layoutX="711.0" layoutY="28.0" text="Status:" />
-                  <Button layoutX="926.0" layoutY="24.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Confirmar Pagamento" />
+                  <Button layoutX="926.0" layoutY="24.0" mnemonicParsing="false" onAction="#confirmarPagto" prefHeight="25.0" prefWidth="153.0" text="Confirmar Pagamento">
+                     <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@check_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <DatePicker fx:id="filtroPagto" layoutX="133.0" layoutY="24.0" />
-                  <Button layoutX="1092.0" layoutY="24.0" mnemonicParsing="false" onAction="#limparCampos1" prefHeight="25.0" prefWidth="129.0" text="Limpar Campos" />
+                  <Button layoutX="1092.0" layoutY="24.0" mnemonicParsing="false" onAction="#limparCampos1" prefHeight="25.0" prefWidth="129.0" text="Limpar Campos">
+                     <graphic>
+                        <ImageView fitHeight="14.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@close_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
             </AnchorPane>
         </content>
+         <graphic>
+            <ImageView fitHeight="21.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@payments_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Tab>
       <Tab fx:id="tabRelatorio" text="Relatório Periódico">
         <content>
@@ -143,14 +245,35 @@
                      </columns>
                   </TableView>
                   <Label layoutX="34.0" layoutY="34.0" text="Data Inicio:" />
-                  <Button fx:id="btnRelatorio" layoutX="562.0" layoutY="30.0" mnemonicParsing="false" onAction="#relatorioPeriodico" prefHeight="25.0" prefWidth="553.0" text="Gerar Relatório" />
+                  <Button fx:id="btnRelatorio" layoutX="562.0" layoutY="30.0" mnemonicParsing="false" onAction="#relatorioPeriodico" prefHeight="25.0" prefWidth="553.0" text="Gerar Relatório">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@quick_reference_all_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <DatePicker fx:id="dataInicio" layoutX="101.0" layoutY="30.0" />
                   <Label layoutX="288.0" layoutY="34.0" text="Data Fim:" />
                   <DatePicker fx:id="dataFim" layoutX="345.0" layoutY="30.0" />
-                  <Button layoutX="1122.0" layoutY="30.0" mnemonicParsing="false" onAction="#limparCampos2" prefHeight="25.0" prefWidth="129.0" text="Limpar Campos" />
+                  <Button layoutX="1122.0" layoutY="30.0" mnemonicParsing="false" onAction="#limparCampos2" prefHeight="25.0" prefWidth="129.0" text="Limpar Campos">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@close_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
             </AnchorPane>
         </content>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@description_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Tab>
   </tabs>
 </TabPane>

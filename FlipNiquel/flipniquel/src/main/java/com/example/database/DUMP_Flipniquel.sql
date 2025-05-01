@@ -86,6 +86,62 @@ CREATE TABLE funcionario (
     setor VARCHAR(50) NOT NULL
 );
 
+CREATE TABLE setores (
+    id_setores int auto_increment primary key,
+    nome_setor varchar(50)
+);
+
+CREATE TABLE funcionarios (
+    id_funcionarios int auto_increment primary key,
+    nome varchar(50)
+);
+
+CREATE TABLE funcionario_setor (
+    id_funcionario_setor int auto_increment primary key,
+    fk_funcionario int,
+    fk_setor int,
+    FOREIGN KEY (fk_funcionario) REFERENCES funcionarios(id_funcionarios),
+    FOREIGN KEY (fk_setor) REFERENCES setores(id_setores)
+);
+
+create table fluxo(
+id_fluxo int auto_increment primary key,
+data_transacao varchar(50),
+fk_setor int,
+descricao varchar(50),
+valor DECIMAL(10,2),
+categoria varchar(50),
+forma_pagto varchar(50),
+vencimento varchar(50),
+status boolean,
+foreign key (fk_setor) references setores(id_setores));
+
+
+create table solicitacoes(
+id_solicitacoes int auto_increment primary key,
+data_solicitacao varchar(50), 
+fk_setor int,
+descricao varchar(50),
+quantidade varchar(50),
+valor DECIMAL(10,2),
+prazo varchar(50),
+status varchar(50),
+foreign key (fk_setor) references setores(id_setores));
+
+
+create table pagfuncionarios(
+id_pagfuncionarios int auto_increment primary key,
+fk_funcionarios int,
+fk_setor int,
+data_pagto varchar(50),
+salario_base DECIMAL(10,2),
+descontos DECIMAL(10,2) ,
+valor_liquido DECIMAL(10,2),
+status boolean,
+foreign key (fk_setor) references setores(id_setores));
+
+
+
 CREATE TABLE produto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,

@@ -17,7 +17,7 @@ public class App extends Application {
         Parent root = loader.load();
         //Gera o titulo da Página e o Icone
         stage.setTitle("Financeiro");
-        Image image = new Image(this.getClass().getResource("/com/example/logoFabrica.png").toExternalForm());
+        Image image = new Image(this.getClass().getResource("/com/example/logoFinanceiro2.png").toExternalForm());
         stage.getIcons().add(image);
         stage.setScene(new Scene(root));
         stage.show();
