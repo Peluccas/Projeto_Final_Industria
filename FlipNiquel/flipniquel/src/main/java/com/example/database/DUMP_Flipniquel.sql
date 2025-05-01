@@ -69,7 +69,7 @@ DROP INDEX `pisPasep_UNIQUE` ,
 DROP INDEX `ctps_UNIQUE` ;
 
 
-CREATE TABLE usuarioFinanciero(
+CREATE TABLE usuarioFinanceiro(
     id SERIAL PRIMARY KEY NOT NULL,
     usuario VARCHAR(100) NOT NULL,
     senha VARCHAR(100) NOT NULL
