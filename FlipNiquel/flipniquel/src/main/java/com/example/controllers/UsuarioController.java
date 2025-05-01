@@ -133,7 +133,7 @@ public class UsuarioController {
                 } else {
                     mostrarAlerta(Alert.AlertType.INFORMATION, "Login bem-sucedido", "Bem-vindo, " + usuario + "!");
                     // Aqui você pode redirecionar para outra tela
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/TelaProducao.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) txtUsuario.getScene().getWindow();
                     stage.setTitle("Flip Niquel");
@@ -269,6 +269,14 @@ public class UsuarioController {
                 } else {
                     mostrarAlerta(Alert.AlertType.INFORMATION, "Login bem-sucedido", "Bem-vindo, " + usuario + "!");
                     // Aqui você pode redirecionar para outra tela
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/MonitoramentoView.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) txtUsuario.getScene().getWindow();
+                    stage.setTitle("Flip Niquel");
+                    Image image = new Image(this.getClass().getResource("/com/example/logoFabrica.png").toExternalForm());
+                    stage.getIcons().add(image);
+                    stage.setScene(new Scene(root));
+                    stage.show();
                     
                 }
             } else {

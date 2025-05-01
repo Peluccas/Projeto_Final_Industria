@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<VBox spacing="10" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.EquipamentoController">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+    <TabPane tabClosingPolicy="UNAVAILABLE">
+        <!-- Aba de Cadastro de Equipamento -->
+        <Tab text="Cadastro de Equipamento">
+            <graphic>
+                <ImageView fitHeight="16.0" fitWidth="16.0">
+                    <Image url="@cadastro.png"/>
+                </ImageView>
+            </graphic>
+            <VBox spacing="5">
+                <HBox spacing="10">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Código:" />
+                        <TextField fx:id="txtCodigo" promptText="Código" />
+                        <Label text="Nome:" />
+                        <TextField fx:id="txtNome" promptText="Nome do Equipamento" />
+                        <Label text="Categoria:" />
+                        <ComboBox fx:id="cmbCategoria" maxWidth="Infinity" promptText="Selecione a Categoria" />
+                        <Label text="Modelo:" />
+                        <TextField fx:id="txtModelo" promptText="Modelo do Equipamento" />
+                    </VBox>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Número de Série:" />
+                        <TextField fx:id="txtNumeroSerie" promptText="Número de Série" />
+                        <Label text="Setor:" />
+                        <TextField fx:id="txtSetor" promptText="Setor" />
+                        <Label text="Data de Aquisição:" />
+                        <DatePicker fx:id="dtAquisicao" maxWidth="Infinity" promptText="dd/mm/aaaa" />
+                        <Label text="Valor de Aquisição (R$):" />
+                        <TextField fx:id="txtValorAquisicao" promptText="Valor" />
+                    </VBox>
+                </HBox>
+                <HBox spacing="10">
+                    <CheckBox fx:id="chkManutencaoPeriodica" text="Requer Manutenção Periódica" />
+                </HBox>
+                <HBox spacing="10">
+                    <Button fx:id="btnSalvar" text="Salvar" onAction="#salvarEquipamento">
+                        <graphic>
+                            <ImageView fitHeight="16.0" fitWidth="16.0">
+                                <Image url="@salvar.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </HBox>
+            </VBox>
+        </Tab>
+        <!-- Aba de Manutenção -->
+        <Tab text="Manutenção">
+            <graphic>
+                <ImageView fitHeight="16.0" fitWidth="16.0">
+                    <Image url="@manutencao.png"/>
+                </ImageView>
+            </graphic>
+            <VBox spacing="5">
+                <TitledPane text="Registrar Manutenção" expanded="true">
+                    <VBox spacing="5">
+                        <HBox spacing="10">
+                            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                <Label text="Equipamento:" />
+                                <ComboBox fx:id="cmbEquipamentoManutencao" maxWidth="Infinity" promptText="Selecione o Equipamento" />
+                                <Label text="Tipo de Manutenção:" />
+                                <ComboBox fx:id="cmbTipoManutencao" maxWidth="Infinity" promptText="Tipo de Manutenção" />
+                            </VBox>
+                            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                <Label text="Data de Início:" />
+                                <DatePicker fx:id="dtInicioManutencao" maxWidth="Infinity" promptText="dd/mm/aaaa" />
+                                <Label text="Data de Conclusão:" />
+                                <DatePicker fx:id="dtConclusaoManutencao" maxWidth="Infinity" promptText="dd/mm/aaaa" />
+                            </VBox>
+                        </HBox>
+                        <Label text="Descrição do Serviço:" />
+                        <TextArea fx:id="txtDescricaoServico" prefRowCount="3" />
+                        <HBox spacing="10">
+                            <Button fx:id="btnRegistrarManutencao" text="Registrar Manutenção" onAction="#registrarManutencao">
+                                <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0">
+                                        <Image url="@registrar.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+                
+                <TitledPane text="Manutenções Registradas" expanded="true">
+                    <VBox spacing="5">
+                        <TableView fx:id="tblManutencoes" VBox.vgrow="ALWAYS">
+                            <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                            <columns>
+                                <TableColumn fx:id="colManutencaoEquipamento" text="Equipamento" />
+                                <TableColumn fx:id="colManutencaoTipo" text="Tipo" />
+                                <TableColumn fx:id="colManutencaoDataInicio" text="Data de Início" />
+                                <TableColumn fx:id="colManutencaoDataConclusao" text="Data de Conclusão" />
+                                <TableColumn fx:id="colManutencaoStatus" text="Status" />
+                                <TableColumn fx:id="colManutencaoObservacoes" text="Observações" />
+                            </columns>
+                        </TableView>
+                        <HBox spacing="10">
+                            <Button fx:id="btnLiberarManutencao" text="Liberar Equipamento" onAction="#liberarManutencao">
+                                <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0">
+                                        <Image url="@liberar.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+            </VBox>
+        </Tab>
+        <!-- Aba de Empréstimo -->
+        <Tab text="Empréstimo">
+            <graphic>
+                <ImageView fitHeight="16.0" fitWidth="16.0">
+                    <Image url="@emprestimo.png"/>
+                </ImageView>
+            </graphic>
+            <VBox spacing="5">
+                <TitledPane text="Registrar Empréstimo" expanded="true">
+                    <VBox spacing="5">
+                        <HBox spacing="10">
+                            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                <Label text="Equipamento:" />
+                                <ComboBox fx:id="cmbEquipamentoEmprestimo" maxWidth="Infinity" promptText="Selecione o Equipamento" />
+                                <Label text="Setor Solicitante:" />
+                                <TextField fx:id="txtSetorSolicitante" promptText="Setor que solicitou o empréstimo" />
+                            </VBox>
+                            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                <Label text="Data de Início:" />
+                                <DatePicker fx:id="dtInicioEmprestimo" maxWidth="Infinity" promptText="dd/mm/aaaa" />
+                                <Label text="Data de Devolução:" />
+                                <DatePicker fx:id="dtDevolucaoEmprestimo" maxWidth="Infinity" promptText="dd/mm/aaaa" />
+                            </VBox>
+                        </HBox>
+                        <Label text="Observações:" />
+                        <TextArea fx:id="txtObservacoesEmprestimo" prefRowCount="3" />
+                        <HBox spacing="10">
+                            <Button fx:id="btnRegistrarEmprestimo" text="Registrar Empréstimo" onAction="#registrarEmprestimo">
+                                <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0">
+                                        <Image url="@registrar.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+                
+                <TitledPane text="Empréstimos Registrados" expanded="true">
+                    <VBox spacing="5">
+                        <TableView fx:id="tblEmprestimos" VBox.vgrow="ALWAYS">
+                            <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                            <columns>
+                                <TableColumn fx:id="colEmprestimoEquipamento" text="Equipamento" />
+                                <TableColumn fx:id="colEmprestimoSetor" text="Setor Solicitante" />
+                                <TableColumn fx:id="colEmprestimoDataInicio" text="Data de Início" />
+                                <TableColumn fx:id="colEmprestimoDataDevolucao" text="Data de Devolução" />
+                                <TableColumn fx:id="colEmprestimoStatus" text="Status" />
+                                <TableColumn fx:id="colEmprestimoObservacoes" text="Observações" />
+                            </columns>
+                        </TableView>
+                        <HBox spacing="10">
+                            <Button fx:id="btnLiberarEmprestimo" text="Liberar Equipamento" onAction="#liberarEmprestimo">
+                                <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0">
+                                        <Image url="@liberar.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+            </VBox>
+        </Tab>
+        <!-- Aba de Listagem de Equipamentos -->
+        <Tab text="Listagem de Equipamentos">
+            <graphic>
+                <ImageView fitHeight="16.0" fitWidth="16.0">
+                    <Image url="@listagem.png"/>
+                </ImageView>
+            </graphic>
+            <VBox spacing="5">
+                <HBox spacing="10">
+                    <Label text="Filtrar por:" />
+                    <ComboBox fx:id="cmbFiltro" promptText="Selecione o filtro" />
+                    <TextField fx:id="txtFiltro" promptText="Digite para filtrar" HBox.hgrow="ALWAYS" />
+                    <Button fx:id="btnBuscar" text="Buscar" onAction="#aplicarFiltro">
+                        <graphic>
+                            <ImageView fitHeight="16.0" fitWidth="16.0">
+                                <Image url="@buscar.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </HBox>
+                <TableView fx:id="tblEquipamentos" VBox.vgrow="ALWAYS" editable="true">
+                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                    <columns>
+                        <TableColumn fx:id="colCodigo" text="Código" />
+                        <TableColumn fx:id="colNome" text="Nome" />
+                        <TableColumn fx:id="colCategoria" text="Categoria" />
+                        <TableColumn fx:id="colModelo" text="Modelo" />
+                        <TableColumn fx:id="colNumeroSerie" text="Nº Série" />
+                        <TableColumn fx:id="colSetor" text="Setor" />
+                        <TableColumn fx:id="colDataAquisicao" text="Data Aquisição" />
+                        <TableColumn fx:id="colValorAquisicao" text="Valor (R$)" />
+                        <TableColumn fx:id="colStatus" text="Status" />
+                        <TableColumn fx:id="colManutencaoPeriodica" text="Manutenção Periódica" />
+                        <TableColumn fx:id="colObservacoes" text="Observações" />
+                    </columns>
+                </TableView>
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button fx:id="btnEditarSelecionado" text="Editar" onAction="#editarEquipamentoSelecionado">
+                        <graphic>
+                            <ImageView fitHeight="16.0" fitWidth="16.0">
+                                <Image url="@editar.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="btnMostrarDetalhes" text="Detalhes" onAction="#mostrarDetalhes">
+                        <graphic>
+                            <ImageView fitHeight="16.0" fitWidth="16.0">
+                                <Image url="@detalhes.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="btnExcluir" text="Excluir" onAction="#excluirEquipamento">
+                        <graphic>
+                            <ImageView fitHeight="16.0" fitWidth="16.0">
+                                <Image url="@excluir.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="btnRelatorio" text="Gerar Relatório" onAction="#gerarRelatorio">
+                        <graphic>
+                            <ImageView fitHeight="16.0" fitWidth="16.0">
+                                <Image url="@relatorio.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </HBox>
+            </VBox>
+        </Tab>
+    </TabPane>
+</VBox>
