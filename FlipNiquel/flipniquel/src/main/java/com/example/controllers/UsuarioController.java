@@ -235,7 +235,7 @@ public class UsuarioController {
                 } else {
                     mostrarAlerta(Alert.AlertType.INFORMATION, "Login bem-sucedido", "Bem-vindo, " + usuario + "!");
                     // Aqui você pode redirecionar para outra tela
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/automacao.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) txtUsuario.getScene().getWindow();
                     stage.setTitle("Flip Niquel");
