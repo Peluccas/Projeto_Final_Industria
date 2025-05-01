@@ -42,6 +42,7 @@ public class AlmoxarifadoController {
     private ObservableList<almoxarifado> listaProdutos = FXCollections.observableArrayList();
 
 //atualização//
+
 @FXML private TextField txtIdAtualizarProduto;
 @FXML private TextField txtNomeAt ;
 @FXML private TextField txtQuantidadeAt;
@@ -51,7 +52,7 @@ public class AlmoxarifadoController {
 @FXML private TextField txtCodigoAt;
 @FXML private TextField txtPrecoAt;
 @FXML private ComboBox<String> cbmCategoriaAt;
-
+ 
 
 
 //filtro//
@@ -119,13 +120,13 @@ public void initialize() {
 
     cmbCategoria.getItems().addAll("placas", "Peças", "Utilitários", "materiais", "equipamentos", "outros..");
     cbmFiltro.getItems().addAll("placas", "Peças", "Utilitários", "materiais", "equipamentos", "outros..");
-    cbmCategoriaAt.getItems().addAll("placas", "Peças", "Utilitários", "materiais", "equipamentos", "outros..");
+   cbmCategoriaAt.getItems().addAll("placas", "Peças", "Utilitários", "materiais", "equipamentos", "outros..");
 
     carregarProdutos();
     carregarProdutos();
 
-    // Verificar se os campos são encontrados corretamente
-    System.out.println(txtIdAtualizarProduto);  // Deve exibir o TextField
+   
+     
     // Adiciona um listener para a seleção de itens na tabela
     tableProdutos.setOnMouseClicked((MouseEvent event) -> {
         if (event.getClickCount() > 1) {
@@ -164,6 +165,7 @@ public void initialize() {
 
 @FXML
 //atualização de produtos
+
 public void atualizarprodutos() {
     int id = Integer.parseInt(txtIdAtualizarProduto.getText());
      String nome = txtNomeAt.getText();
@@ -178,7 +180,7 @@ public void atualizarprodutos() {
     //conexão com o banco
     try (Connection conn = Database.getConnection();
     //update do banco de dados
-         PreparedStatement stmt = conn.prepareStatement("UPDATE funcionarios SET nome = ?, quantidade = ?, marca = ?, fornecedor = ?, localizacao = ?, codigo = ?, preco = ?, categoria = ?")) {
+         PreparedStatement stmt = conn.prepareStatement("UPDATE estoque SET nome = ?, quantidade = ?, marca = ?, fornecedor = ?, localizacao = ?, codigo = ?, preco_de_custo = ?, categoria = ?,   WHERE id = ?")) {
         stmt.setString(1, nome );
         stmt.setString (2,  quantidade);
         stmt.setString(3, marca);
@@ -228,12 +230,27 @@ private void filtrar() {
         }
         return true;
     });
+ 
 
     tableProdutos.setItems(dadosFiltrados);
 
 
 }
 
+
+@FXML
+private void limparFiltro() {
+    filtroNome.clear();
+    filtroQuantidade.clear();
+    filtroPreco.clear();
+    filtroMarca.clear();
+    filtroFornecedor.clear();
+    filtroCodigo.clear();
+    filtroLocalizacao.clear();
+    cmbCategoria.setValue(null);
+    tableProdutos.setItems(listaProdutos);
+    mostrarAlerta(Alert.AlertType.INFORMATION, "Sucesso", " filtro limpo com sucesso!");
+}
 
 
 
@@ -257,6 +274,32 @@ private void preencherCamposAtualizacao() {
     }
 }
 
+@FXML
+private void excluirProduto() {
+    almoxarifado produtoSelecionado = tableProdutos.getSelectionModel().getSelectedItem();
+
+    if (produtoSelecionado != null) {
+        try (Connection conn = Database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("DELETE FROM estoque WHERE id = ?")) {
+
+            stmt.setInt(1, produtoSelecionado.getId());
+            stmt.executeUpdate();
+
+            carregarProdutos();
+
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Produto excluído com sucesso!");
+
+            // Voltar para a aba de visualização
+            tabPaneAlmoxarifado.getSelectionModel().select(tabVizualizacaoProduto);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao excluir o produto: " + e.getMessage());
+        }
+    } else {
+        mostrarAlerta(Alert.AlertType.WARNING, "Aviso", "Nenhum produto selecionado.");
+    }
+}
 
 //mensagem de alerta
 private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensagem) {
@@ -266,4 +309,5 @@ private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensagem)
     alerta.setContentText(mensagem);
     alerta.showAndWait();
 }
+
 }

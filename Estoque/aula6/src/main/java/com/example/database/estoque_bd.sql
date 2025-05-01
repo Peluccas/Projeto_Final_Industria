@@ -8,7 +8,7 @@ CREATE TABLE estoque (
     marca VARCHAR(100),
     fornecedor VARCHAR(255),
     localizacao VARCHAR(255),
-    codigo VARCHAR(50) NOT NULL UNIQUE,
+    codigo VARCHAR(50),
     preco_de_custo DECIMAL(10, 2),
     categoria VARCHAR(100)
 );

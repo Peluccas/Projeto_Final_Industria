@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<TabPane fx:id="tabPaneAlmoxarifado" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="852.0" prefWidth="1272.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AlmoxarifadoController">
+  <tabs>
+    <Tab fx:id="tabCadastroProduto" text="Cadastro de material">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="8.0" layoutY="8.0" prefHeight="25.0" prefWidth="142.0" text="Nome do material">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtNome" layoutX="-1.0" layoutY="33.0" prefHeight="25.0" prefWidth="1272.0" promptText="nome" />
+                  <Label layoutX="4.0" layoutY="58.0" prefHeight="25.0" prefWidth="128.0" text="Quantidade">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtQuantidade" layoutX="-2.0" layoutY="83.0" prefHeight="25.0" prefWidth="1272.0" promptText="quantidade" />
+                  <Label layoutX="8.0" layoutY="110.0" prefHeight="25.0" prefWidth="142.0" text="Marca do material">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtMarca" layoutX="-1.0" layoutY="135.0" prefHeight="25.0" prefWidth="1272.0" promptText="marca" />
+                  <Label layoutX="8.0" layoutY="160.0" prefHeight="25.0" prefWidth="142.0" text="Fornecedor">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtFornecedor" layoutX="-2.0" layoutY="185.0" prefHeight="25.0" prefWidth="1272.0" promptText="fornecedor" />
+                  <Label layoutX="3.0" layoutY="340.0" prefHeight="25.0" prefWidth="172.0" text="Localização do material">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtLocalizacao" layoutY="365.0" prefHeight="25.0" prefWidth="1272.0" promptText="localização" />
+                  <Label layoutX="5.0" layoutY="280.0" prefHeight="25.0" prefWidth="172.0" text="Codigo do produto">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtCodigo" layoutY="305.0" prefHeight="25.0" prefWidth="1272.0" promptText="codigo" />
+                  <Label layoutX="3.0" layoutY="217.0" prefHeight="25.0" prefWidth="172.0" text="Preço de custo">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtPrecoDeCusto" layoutX="-1.0" layoutY="242.0" prefHeight="25.0" prefWidth="1272.0" promptText="preço" />
+                  <Label layoutX="6.0" layoutY="399.0" prefHeight="25.0" prefWidth="172.0" text="Categoria">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cmbCategoria" layoutX="5.0" layoutY="424.0" prefHeight="25.0" prefWidth="205.0" />
+                  <Button fx:id="salvarProduto" layoutX="256.0" layoutY="417.0" mnemonicParsing="false" onAction="#salvarProduto" prefHeight="14.0" prefWidth="220.0" text="Salvar" textFill="#40bc06">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@iconSave.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+        </AnchorPane>
+      </content>
+    </Tab>
+      <Tab fx:id="tabAtualizarProduto" text="Atualização estoque">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="txtNomeAt" layoutX="2.0" layoutY="89.0" prefHeight="25.0" prefWidth="1279.0" promptText="nome" />
+                  <TextField fx:id="txtPrecoAt" layoutY="412.0" prefWidth="1272.0" promptText="preço" />
+                  <TextField fx:id="txtCodigoAt" layoutX="-1.0" layoutY="358.0" prefHeight="25.0" prefWidth="1272.0" promptText="codigo" />
+                  <TextField fx:id="txtFornecedorAt" layoutX="1.0" layoutY="255.0" prefHeight="25.0" prefWidth="1280.0" promptText="fornecedor" />
+                  <TextField fx:id="txtMarcaAt" layoutX="1.0" layoutY="197.0" prefHeight="25.0" prefWidth="1281.0" promptText="marca" />
+                  <TextField fx:id="txtLocalizacaoAt" layoutX="-2.0" layoutY="307.0" prefHeight="25.0" prefWidth="1280.0" promptText="localização" />
+                  <TextField fx:id="txtQuantidadeAt" layoutX="1.0" layoutY="144.0" prefHeight="25.0" prefWidth="1280.0" promptText="quantidade" />
+                  <ComboBox fx:id="cbmCategoriaAt" layoutX="5.0" layoutY="467.0" prefHeight="25.0" prefWidth="261.0" />
+                  <Label layoutX="2.0" layoutY="124.0" text="Quantidade">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="177.0" text="Marca">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="3.0" layoutY="235.0" text="Fornecedor">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="3.0" layoutY="287.0" text="Localização">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="4.0" layoutY="338.0" text="Codigo">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="392.0" text="Preço">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="8.0" layoutY="447.0" text="Categoria">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="69.0" text="Nome">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="buttonAt" layoutX="321.0" layoutY="460.0" mnemonicParsing="false" onAction="#atualizarprodutos" prefHeight="61.0" prefWidth="131.0" text="Atualizar" textFill="#40bc06">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="txtIdAtualizarProduto" editable="false" layoutX="2.0" layoutY="34.0" prefHeight="25.0" prefWidth="1279.0" promptText="id" />
+                  <Label layoutX="2.0" layoutY="14.0" text="Id">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="excluirProduto" layoutX="500.0" layoutY="460.0" mnemonicParsing="false" onAction="#excluirProduto" prefHeight="61.0" prefWidth="131.0" text="Excluir" textFill="RED">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+    <Tab fx:id="tabVizualizacaoProduto" text="Visualização almoxarifado">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="708.0" prefWidth="969.0">
+          <children>
+            <ImageView fitHeight="28.0" fitWidth="22.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@iconVisualizar.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="25.0" layoutY="2.0" prefHeight="25.0" prefWidth="92.0" text="vizualização">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="4.0" layoutY="40.0" prefHeight="25.0" prefWidth="74.0" text="Nome">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="filtroNome" layoutX="3.0" layoutY="65.0" prefHeight="25.0" prefWidth="511.0" promptText="nome" />
+            <Label layoutX="4.0" layoutY="106.0" prefHeight="25.0" prefWidth="88.0" text="Quantidade">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="filtroQuantidade" layoutX="3.0" layoutY="131.0" prefHeight="25.0" prefWidth="512.0" promptText="quantidade" />
+            <Label layoutX="4.0" layoutY="165.0" prefHeight="25.0" prefWidth="142.0" text="Marca do material">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="filtroMarca" layoutX="3.0" layoutY="190.0" prefHeight="25.0" prefWidth="511.0" promptText="marca " />
+            <Label layoutX="547.0" layoutY="40.0" prefHeight="25.0" prefWidth="142.0" text="Fornecedor">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="filtroFornecedor" layoutX="544.0" layoutY="65.0" prefHeight="25.0" prefWidth="511.0" promptText="fornecedor" />
+            <Label layoutX="7.0" layoutY="220.0" prefHeight="25.0" prefWidth="142.0" text="Localização">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="filtroLocalizacao" layoutX="4.0" layoutY="239.0" prefHeight="25.0" prefWidth="511.0" promptText="localização" />
+            <Label layoutX="544.0" layoutY="165.0" prefHeight="25.0" prefWidth="142.0" text="Codigo do produto">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="filtroCodigo" layoutX="544.0" layoutY="190.0" prefHeight="25.0" prefWidth="511.0" promptText="codigo do produto" />
+            <Label layoutX="547.0" layoutY="106.0" prefHeight="25.0" prefWidth="142.0" text="Preço de custo">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="filtroPreco" layoutX="544.0" layoutY="131.0" prefHeight="25.0" prefWidth="511.0" promptText="preço" />
+            <Label layoutX="544.0" layoutY="220.0" prefHeight="25.0" prefWidth="142.0" text="Categoria">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cbmFiltro" layoutX="544.0" layoutY="239.0" prefHeight="25.0" prefWidth="220.0" />
+            <TableView fx:id="tableProdutos" layoutX="-1.0" layoutY="312.0" prefHeight="511.0" prefWidth="1272.0">
+              <columns>
+                <TableColumn fx:id="colId" prefWidth="75.0" text="id" />
+                <TableColumn fx:id="colNome" prefWidth="75.0" text="nome" />
+                <TableColumn fx:id="colQuantidade" prefWidth="75.0" text="quantidade" />
+                <TableColumn fx:id="colMarca" prefWidth="75.0" text="marca" />
+                <TableColumn fx:id="colFornecedor" prefWidth="75.0" text="fornecedor" />
+                <TableColumn fx:id="colLocalizacao" prefWidth="75.0" text="localização" />
+                <TableColumn fx:id="colCodigo" prefWidth="75.0" text="codigo" />
+                <TableColumn fx:id="colPrecoDeCusto" prefWidth="75.0" text="preço" />
+                <TableColumn fx:id="colCategoria" prefWidth="75.0" text="categoria" />
+              </columns>
+            </TableView>
+            <Button fx:id="btnFiltrar" layoutX="814.0" layoutY="241.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="50.0" prefWidth="95.0" text="Filtrar">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnLimparFiltro" layoutX="923.0" layoutY="241.0" mnemonicParsing="false" onAction="#limparFiltro" prefHeight="49.0" prefWidth="142.0" text="Limpar filtro">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+          </children>
+        </AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>
