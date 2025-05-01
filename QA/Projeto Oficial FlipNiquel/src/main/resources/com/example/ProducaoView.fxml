@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.ProducaoController">
+   <children>
+      <TabPane layoutX="-2.0" layoutY="-5.0" prefHeight="730.0" prefWidth="1312.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+             <Tab text="Envios de Lotes">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="691.0" prefWidth="1251.0">
+                     <children>
+                        <Text layoutX="33.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contratos">
+                           <font>
+                              <Font name="Arial" size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="textEnvios" layoutX="446.0" layoutY="29.0" promptText="#" />
+                        <Text layoutX="414.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lote" />
+                        <Button fx:id="btnBuscarEnvios" layoutX="610.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnBuscarEnviosAct" prefHeight="25.0" prefWidth="79.0" text="Buscar" />
+                        <TableView fx:id="tableEnvios" layoutX="44.0" layoutY="76.0" prefHeight="513.0" prefWidth="927.0">
+                          <columns>
+                            <TableColumn fx:id="columIdAuto" prefWidth="50.0" text="id" />
+                            <TableColumn fx:id="columSeloAuto" prefWidth="127.0" text="selo" />
+                              <TableColumn fx:id="columDescriAuto" prefWidth="148.0" text="descricao" />
+                              <TableColumn fx:id="columStatusAuto" prefWidth="123.0" text="status" />
+                              <TableColumn fx:id="columProduAuto" prefWidth="134.0" text="produto" />
+                              <TableColumn fx:id="columLoteAuto" prefWidth="65.0" text="lote" />
+                              <TableColumn fx:id="columChegadaAuto" prefWidth="129.0" text="chegada" />
+                              <TableColumn fx:id="columSaidaAuto" prefWidth="150.0" text="saida" />
+                          </columns>
+                        </TableView>
+                        <DatePicker fx:id="dateLote" layoutX="1062.0" layoutY="151.0" prefHeight="25.0" prefWidth="131.0" promptText="a/d/y" />
+                        <Text layoutX="1000.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cliente" />
+                        <Text layoutX="1011.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entrega" />
+                        <Button fx:id="enviarLote" layoutX="1061.0" layoutY="223.0" mnemonicParsing="false" onAction="#enviarLoteAct" prefHeight="39.0" prefWidth="101.0" text="Enviar" />
+                        <Text layoutX="44.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmados">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <RadioButton fx:id="sedex" layoutX="1112.0" layoutY="192.0" mnemonicParsing="false" text="SEDEX" />
+                        <RadioButton fx:id="pac" layoutX="1047.0" layoutY="192.0" mnemonicParsing="false" text="PAC" />
+                        <Separator layoutX="989.0" layoutY="75.0" prefHeight="5.0" prefWidth="222.0" />
+                        <Separator layoutX="1212.0" layoutY="76.0" orientation="VERTICAL" prefHeight="200.0" />
+                        <Separator layoutX="986.0" layoutY="76.0" orientation="VERTICAL" prefHeight="200.0" />
+                        <Separator layoutX="986.0" layoutY="275.0" prefHeight="3.0" prefWidth="226.0" />
+                        <Text layoutX="1075.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Envios">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="nomeCliente" layoutX="1047.0" layoutY="110.0" prefHeight="25.0" prefWidth="156.0" promptText="Nome" />
+                     </children>
+                  </AnchorPane>
+               </content>
+               <graphic>
+                  <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@iconCadastro.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>

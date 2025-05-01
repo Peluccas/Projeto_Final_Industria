@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<TabPane fx:id="tabPaneFuncionario" layoutX="1.0" layoutY="-3.0" prefHeight="720.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.FuncionarioController">
+    <tabs>
+        <Tab text="Painel de Controle">
+            <content>
+            <Pane>
+               <children>
+                  <Text layoutX="30.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DASHBOARD" wrappingWidth="119.63998413085938">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <ProgressIndicator fx:id="progressIndica" layoutX="944.0" layoutY="583.0" prefHeight="41.0" prefWidth="82.0" progress="0.0" />
+                  <ProgressBar fx:id="progressBar" layoutX="531.0" layoutY="567.0" prefHeight="20.0" prefWidth="277.0" progress="0.0" />
+                  
+                  <BarChart fx:id="barChart" layoutX="64.0" layoutY="77.0" prefHeight="252.0" prefWidth="508.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+                  <LineChart fx:id="lineChart" layoutX="669.0" layoutY="318.0" prefHeight="259.0" prefWidth="528.0">
+                    <xAxis>
+                      <CategoryAxis prefHeight="19.0" prefWidth="278.0" side="BOTTOM" fx:id="xAxis" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="yAxis" side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+                  <Text layoutX="728.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <Button fx:id="btnDash" layoutX="864.0" layoutY="590.0" mnemonicParsing="false" onAction="#btnDashLote" prefHeight="25.0" prefWidth="69.0" text="Atualizar" textAlignment="CENTER" />
+                  <TableView fx:id="tableDashTela" accessibleRole="TAB_PANE" layoutX="531.0" layoutY="583.0" prefHeight="78.0" prefWidth="277.0">
+                    <columns>
+                      <TableColumn fx:id="columTotal" prefWidth="55.0" text="Total" />
+                      <TableColumn fx:id="columApro" prefWidth="77.0" text="Aprovados" />
+                        <TableColumn fx:id="columRepro" prefWidth="77.0" text="Reprovados" />
+                        <TableColumn fx:id="columConcerto" prefWidth="67.0" text="Conçerto" />
+                    </columns>
+                  </TableView>
+                  <Text layoutX="1150.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Olá User">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <PieChart fx:id="pieChart" layoutX="90.0" layoutY="330.0" prefHeight="235.0" prefWidth="475.0" />
+                  <ImageView fitHeight="44.0" fitWidth="53.0" layoutX="1212.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@logoFabrica.png" />
+                     </image>
+                  </ImageView>
+                  <BarChart fx:id="barChart1" layoutX="667.0" layoutY="77.0" prefHeight="250.0" prefWidth="531.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+               </children>
+            </Pane>
+            </content>
+            <graphic>
+                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@iconCadastro.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Tab>
+    </tabs>
+   <contextMenu>
+      <ContextMenu>
+        <items>
+          <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+        </items>
+      </ContextMenu>
+   </contextMenu>
+</TabPane>
