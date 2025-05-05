@@ -8,6 +8,8 @@ CREATE TABLE usuarioRH(
     senha VARCHAR(100) NOT NULL
 );
 
+INSERT INTO usuarioRH(usuario, senha) VALUES ('julia', '123');
+
 CREATE TABLE `dadospessoais` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome_completo` VARCHAR(45) NOT NULL,
@@ -67,6 +69,15 @@ ALTER TABLE `dadosprofissionais`
 DROP INDEX `dadosbancarios_UNIQUE` ,
 DROP INDEX `pisPasep_UNIQUE` ,
 DROP INDEX `ctps_UNIQUE` ;
+
+INSERT INTO dadospessoais (nome_completo, data_nascimento, sexo, estado_civil, conjuge, dependentes, nacionalidade, naturalidade, 
+cpf, rg, endereco, telefone, email, filiacao, tipo_sanguineo, contato_emergencia) 
+VALUES ('Fernanda Lima Oliveira', '14/03/1990', 'Feminino', 'Casado(a)', 'Ricardo Oliveira', 'Lucas Oliveira, Mariana Oliveira', 'Brasil', 'Curitiba-PR', 
+'321.654.987-00', '45.678.321', 'Rua das Palmeiras, 200 - Curitiba - PR', '(41) 99876-5432', 'fernanda.lima@email.com', 'Carlos Lima e Teresa Lima', 'A+', '(41) 99700-1122');
+
+INSERT INTO dadosprofissionais (cargo, departamento, funcao, maquinas, admissao, salario, dadosbancarios, beneficios, escolaridade, ctps, pisPasep, contrato, horario, acidentes, advertencias) 
+VALUES ('Analista Financeira Sênior', 'Financeiro', 'Controle orçamentário, relatórios e auditorias internas', 'Notebook, Calculadora financeira', '05/08/2021', '6700.00', 'Banco do Brasil - Ag. 1122 - C/C 556677-8', 
+'Plano de Saúde, Vale Alimentação', 'Graduação Completa(Bacharelado)', '554433', '98712365400', 'CLT', '08:00 às 17:00', '', 'Advertência verbal em 2022 por atraso');
 
 
 CREATE TABLE usuarioFinanceiro(

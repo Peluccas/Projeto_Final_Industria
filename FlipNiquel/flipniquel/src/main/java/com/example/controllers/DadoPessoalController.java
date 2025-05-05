@@ -1,20 +1,35 @@
+// Define o pacote onde esta classe controllers está localizada
 package com.example.controllers;
 
+// Importa a classe Database responsável pela conexão e manipulação do banco de dados
 import com.example.database.Database;
+
+// Importa as classes modelo que representam os dados pessoais e profissionais
 import com.example.models.DadoPessoal;
 import com.example.models.DadoProfissional;
+
+// Importa classes do JavaFX para manipulação de listas observáveis (listas que notificam automaticamente a interface gráfica quando seus dados são alterados)
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+
+// Importa anotações e controles da interface gráfica do JavaFX (FXML, Tabela, Campo de Texto, etc.)
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+//Importa utilitário para mapear colunas da tabela aos atributos dos objetos
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 
-
+// Importa as classes necessárias para trabalhar com banco de dados (SQL)
 import java.sql.*;
 
+
+
+
+// Declaração da classe que atua como controller na arquitetura MVC (Model-View-Controller)
 public class DadoPessoalController {
+
+    // Campos da interface gráfica (FXML) para o cadastro de dados pessoais do funcionário
     @FXML private TextField txtnome_completoFunc;
     @FXML private TextField txtdatanascimentoFunc;
     @FXML private ComboBox<String> comboBoxSexo;
@@ -32,6 +47,7 @@ public class DadoPessoalController {
     @FXML private ComboBox<String>comboBoxtipo_sanguineoFunc;
     @FXML private TextField txtcontato_emergenciaFunc;
 
+    // Campos da interface gráfica (FXML) para o cadastro de dados profissionais do funcionário
     @FXML private TextField txtcargo;
     @FXML private ComboBox<String> comboBoxdepartamento;
     @FXML private TextField txtfuncao;
@@ -48,7 +64,7 @@ public class DadoPessoalController {
     @FXML private TextField txtacidentes;
     @FXML private TextField txtadvertencias;
 
-
+    // Campos da interface gráfica (FXML) para atualização de dados pessoais de um funcionário já cadastrado
     @FXML private TextField txtIdAtualizarFunc;
     @FXML private TextField txtNomeAtualizarFunc;
     @FXML private TextField txtDataNascimentoAtualizarFunc;
@@ -67,6 +83,7 @@ public class DadoPessoalController {
     @FXML private ComboBox<String>comboBoxTipoSanguineoAtualizarFunc;
     @FXML private TextField txtContatoEmergenciaAtualizarFunc;
 
+    // Campos da interface gráfica (FXML) para atualização de dados profissionais
     @FXML private TextField txtcargoAtualizarFunc;
     @FXML private ComboBox<String> comboBoxdepartamentoAtualizarFunc;
     @FXML private TextField txtfuncaoAtualizarFunc;
@@ -83,9 +100,7 @@ public class DadoPessoalController {
     @FXML private TextField txtacidentesAtualizarFunc;
     @FXML private TextField txtadvertenciasAtualizarFunc;
 
- 
-
-
+    // Tabelas usadas para visualizar dados pessoais e profissionais
     @FXML private TableView<DadoPessoal> tableDadoPessoal;
     @FXML private TableColumn<DadoPessoal, Integer> colIdFunc;
     @FXML private TableColumn<DadoPessoal, String> colNomeFunc;
@@ -125,7 +140,7 @@ public class DadoPessoalController {
     @FXML private TableColumn<DadoProfissional, String> colAdvertencia;
    
 
-
+    // Campos de filtro para facilitar a busca por funcionários
     @FXML private TextField filtroNomeFunc;
     @FXML private TextField filtroDataNascimentoFunc;
     @FXML private ComboBox<String>filtroSexoFunc;
@@ -159,6 +174,7 @@ public class DadoPessoalController {
     @FXML private TextField filtroacidentes;
     @FXML private TextField filtroadvertencias;
 
+    // Abas da interface gráfica
     @FXML private TabPane tabPaneRh;
     @FXML private Tab tabCadastro;
     @FXML private TabPane tabPaneCadastro;
@@ -170,13 +186,18 @@ public class DadoPessoalController {
     @FXML private TabPane tabPaneVisualizacao;
     @FXML private Tab tabAtualizacao;
 
+    // Listas observáveis que alimentam as TableViews com os dados
+    // Quando você modifica ou atualiza essa lista, a interface do usuário é automaticamente atualizada para refletir essas mudanças.
     private ObservableList<DadoPessoal> listaDadoPessoal = FXCollections.observableArrayList();
     private ObservableList<DadoProfissional> listaDadoProfissional = FXCollections.observableArrayList();
 
     private Integer idDadoPessoalSelecionado; 
 
+    // Método executado automaticamente ao carregar a tela
     @FXML
     public void initialize() {
+
+        // Mapeamento das colunas da tabela com os atributos da classe modelo DadoPessoal
         colIdFunc.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNomeFunc.setCellValueFactory(new PropertyValueFactory<>("nome_completo"));
         colDataNascimentoFunc.setCellValueFactory(new PropertyValueFactory<>("data_nascimento"));
@@ -195,7 +216,8 @@ public class DadoPessoalController {
         colTipo_SanguineoFunc.setCellValueFactory(new PropertyValueFactory<>("tipo_sanguineo"));
         colContato_EmergenciaFunc.setCellValueFactory(new PropertyValueFactory<>("contato_emergencia"));
 
-        ObservableList<String> estadosCivis = FXCollections.observableArrayList(
+        // Inicialização das ComboBoxes com valores fixos para facilitar seleção
+            ObservableList<String> estadosCivis = FXCollections.observableArrayList( 
             "Solteiro(a)",
             "Casado(a)",
             "Divorciado(a)",
@@ -302,7 +324,7 @@ public class DadoPessoalController {
         comboBoxNacionalidade.setItems(nacionalidade);
       
 
-         ObservableList<String> escolaridade = FXCollections.observableArrayList(
+        ObservableList<String> escolaridade = FXCollections.observableArrayList(
 
     "Fundamental Incompleto (Até 5º ano)",
     "Fundamental Incompleto (Até 9º ano)",
@@ -377,50 +399,57 @@ public class DadoPessoalController {
         comboBoxcontratoAtualizarFunc.setItems(contratos);
         filtrocontrato.setItems(contratos);
 
-        
-
-       
+           
               
 
         carregarDadoProfissional();
 
         
+
+        // Adiciona um listener (trecho de código que "ouve" e reage quando algo acontece) para detectar quando um item da tabela de Dados Pessoais é selecionado
         tableDadoPessoal.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            
+            // Verifica se um novo item foi realmente selecionado
             if (newSelection != null) {
-                preencherMultiplosCampos(newSelection);
+                preencherMultiplosCampos(newSelection); // Preenche os campos com os dados selecionados
             }
         });
-
+        // Adiciona um listener (trecho de código que "ouve" e reage quando algo acontece) para detectar quando um item da tabela de Dados Profissionais é selecionado
         tableDadoProfissional.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                // Procurar o DadoPessoal correspondente pelo CPF
+                
+                // Procura o DadoPessoal correspondente pelo CPF
                 DadoPessoal pessoalRelacionado = tableDadoPessoal.getItems().stream()
                     .filter(p -> p.getCpf().equals(newSelection.getDados_pessoais()))
                     .findFirst()
                     .orElse(null);
     
                 if (pessoalRelacionado != null) {
+                    // Preenche os campos de dados pessoais e profissionais
                     preencherCamposAtualizacaoPessoal(pessoalRelacionado);
                     preencherCamposAtualizacaoProfissional(newSelection);
                 } else {
+                    // Imprime mensagem de Erro se não encontrar
                     System.err.println("Dado pessoal correspondente não encontrado.");
                 }
             }
         });
     }
     
+    
 
- 
+// Método para preencher os campos de dados pessoais e profissionais quando um dado pessoal é selecionado
 private void preencherMultiplosCampos(DadoPessoal dadopessoalSelecionado) {
-    if (dadopessoalSelecionado == null) return;
+    if (dadopessoalSelecionado == null) return; // Se não houver seleção, não faz nada
 
-    // Procurar o dado profissional com o mesmo ID
+    // Procura o dado profissional correspondente usando o ID do dado pessoal
     DadoProfissional dadoprofissionalSelecionado = tableDadoProfissional.getItems().stream()
         .filter(p -> p.getIdprof() == dadopessoalSelecionado.getId())
         .findFirst()
         .orElse(null);
 
     if (dadoprofissionalSelecionado != null) {
+        // Preenche os campos de dados pessoais e profissionais se encontrados
         preencherCamposAtualizacaoPessoal(dadopessoalSelecionado);
         preencherCamposAtualizacaoProfissional(dadoprofissionalSelecionado);
     } else {
@@ -428,23 +457,22 @@ private void preencherMultiplosCampos(DadoPessoal dadopessoalSelecionado) {
     }
 }
 
+       
+    
 
-    
-    
-    
-    
-    ;
-
-    
+// Método para salvar os dados profissionais e pessoais no banco de dados   
 @FXML
 private void salvarDadosProfissional() {
 
     
-    try (Connection conn = Database.getConnection();
+    try (Connection conn = Database.getConnection(); // Estabelece a conexão com o banco
+         // Preparação para inserção dos dados pessoais
          PreparedStatement stmt = conn.prepareStatement("INSERT INTO dadospessoais (nome_completo, data_nascimento, sexo, estado_civil, conjuge, dependentes, nacionalidade, naturalidade, cpf, rg, endereco, telefone, email, filiacao, tipo_sanguineo, contato_emergencia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+         // Preparação para inserção dos dados profissionais
          PreparedStatement stmt_1 = conn.prepareStatement("INSERT INTO dadosprofissionais (cargo, departamento, funcao, maquinas, admissao, salario, dadosbancarios, beneficios, escolaridade, ctps, pisPasep, contrato, horario, acidentes, advertencias, dados_pessoais) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
                 
-                stmt.setString(1, txtnome_completoFunc.getText());
+                // Insere dados pessoais
+                stmt.setString(1, txtnome_completoFunc.getText());// Preenche com os dados do formulário
                 stmt.setString(2, txtdatanascimentoFunc.getText());
                 stmt.setString(3, comboBoxSexo.getValue());
                 stmt.setString(4, comboBoxEstadoCivil.getValue());
@@ -460,8 +488,9 @@ private void salvarDadosProfissional() {
                 stmt.setString(14, txtfiliacaoFunc.getText());
                 stmt.setString(15, comboBoxtipo_sanguineoFunc.getValue());
                 stmt.setString(16, txtcontato_emergenciaFunc.getText());
-                stmt.executeUpdate();
+                stmt.executeUpdate(); // Executa a inserção/atualização dos dados pessoais
 
+                // Insere dados profissionais
                 stmt_1.setString(1, txtcargo.getText());
                 stmt_1.setString(2, comboBoxdepartamento.getValue());
                 stmt_1.setString(3, txtfuncao.getText());
@@ -477,14 +506,14 @@ private void salvarDadosProfissional() {
                 stmt_1.setString(13, txthorario.getText());
                 stmt_1.setString(14, txtacidentes.getText());
                 stmt_1.setString(15, txtadvertencias.getText());
-                stmt_1.setString(16, txtcpfFunc.getText());
-                stmt_1.executeUpdate();
+                stmt_1.setString(16, txtcpfFunc.getText());// Relaciona o dado profissional ao dado pessoal
+                stmt_1.executeUpdate(); // Executa a inserção/atualização dos dados profissionais
 
-
-               
+           
             
                 carregarDadoProfissional();
                 carregarDadoPessoal();
+            // Tratamento de erro ou acerto
             mostrarAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Funcionário salvo com sucesso!");
         } catch (SQLException e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao salvar funcionário: " + e.getMessage());
@@ -495,6 +524,7 @@ private void salvarDadosProfissional() {
 
     @FXML
     public void limparCadastrar() {
+        // Limpa todos os campos de entrada no formulário de cadastro
         txtnome_completoFunc.clear();
         txtdatanascimentoFunc.clear();
         comboBoxSexo.setValue(null);
@@ -533,15 +563,16 @@ private void salvarDadosProfissional() {
     
 
     
-
+// Método para navegar até a aba de dados profissionais após salvar dados pessoais
     @FXML
 private void salvarDadoPessoal() {
     tabPaneCadastro.getSelectionModel().select(tabDadoProfissional);
     }
             
-
+// Método para atualizar os dados pessoais e profissionais de um funcionário
     @FXML
-public void atualizarDadoProfissional() {
+public void atualizarDadoProfissional() {   
+    // Obtém os dados preenchidos pelo usuário nos campos de texto
     String nome_completo = txtNomeAtualizarFunc.getText();
     String data_nascimento = txtDataNascimentoAtualizarFunc.getText();
     String sexo = comboBoxSexoAtualizarFunc.getValue();
@@ -571,11 +602,13 @@ public void atualizarDadoProfissional() {
     String advertencias = txtadvertenciasAtualizarFunc.getText();
     String acidentes = txtacidentesAtualizarFunc.getText();
 
+    // Verifica se há um ID de dado pessoal selecionado para atualizar
     if (idDadoPessoalSelecionado != null) {
         try (Connection connection = Database.getConnection();
              PreparedStatement statement = connection.prepareStatement("UPDATE dadospessoais SET nome_completo = ?, data_nascimento = ?, sexo = ?, rg = ?, naturalidade = ?, conjuge = ?, dependentes = ?, email = ?, endereco = ?, telefone = ?, contato_emergencia = ?, estado_civil = ? WHERE id = ?");
              PreparedStatement statement_1 = connection.prepareStatement("UPDATE dadosprofissionais SET pisPasep = ?, ctps = ?, admissao = ?, contrato = ?, dadosbancarios = ?, escolaridade = ?, cargo = ?, departamento = ?, maquinas = ?, funcao = ?, horario = ?, salario = ?, beneficios = ?, advertencias = ?, acidentes = ? WHERE dados_pessoais = (SELECT cpf FROM dadospessoais WHERE id = ? )")) {
 
+            // Atualiza os dados pessoais
             statement.setString(1,nome_completo);
             statement.setString(2, data_nascimento);
             statement.setString(3, sexo);
@@ -592,7 +625,7 @@ public void atualizarDadoProfissional() {
             statement.executeUpdate();
             carregarDadoPessoal();
 
-
+            // Atualiza os dados profissionais
             statement_1.setString(1, pisPasep);
             statement_1.setString(2, ctps);
             statement_1.setString(3, admissao);
@@ -612,6 +645,7 @@ public void atualizarDadoProfissional() {
             statement_1.executeUpdate();
             carregarDadoProfissional();
 
+            // Limpa os campos e exibe mensagem de sucesso ou erro
             limparCamposAtualizacao();
             mostrarAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Funcionário atualizado com sucesso!");
             idDadoPessoalSelecionado = null; 
@@ -619,6 +653,7 @@ public void atualizarDadoProfissional() {
             mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao atualizar funcionário: " + e.getMessage());
         }
     } else {
+        // Caso não tenha sido selecionado um funcionário, exibe aviso
         mostrarAlerta(Alert.AlertType.WARNING, "Atenção", "Selecione um funcionário na tabela para atualizar.");
     }
     }
@@ -627,7 +662,7 @@ public void atualizarDadoProfissional() {
     tabPaneAtualizar.getSelectionModel().select(tabAtualizarProfissional);
     }
 
-            
+        // Método para limpar todos os campos de atualização       
         @FXML
         private void limparCamposAtualizacao() {
             txtNomeAtualizarFunc.clear();
@@ -661,6 +696,7 @@ public void atualizarDadoProfissional() {
             txtacidentesAtualizarFunc.clear(); 
         }
     
+        // Método para preencher os campos de atualização com os dados do funcionário selecionado
         private void preencherCamposAtualizacaoPessoal(DadoPessoal pessoal) {
             if (pessoal != null) {
                 idDadoPessoalSelecionado = pessoal.getId();
@@ -680,7 +716,7 @@ public void atualizarDadoProfissional() {
             }
         }
         
-    
+        // Método para preencher os campos de atualização profissional com os dados do funcionário
         private void preencherCamposAtualizacaoProfissional(DadoProfissional profissional) {
             if (profissional != null) {
                 txtpisAtualizarFunc.setText(profissional.getPis());
@@ -703,27 +739,30 @@ public void atualizarDadoProfissional() {
         
 
         private void carregarDadoPessoal() {
-            listaDadoPessoal.clear();
-            try (Connection conn = Database.getConnection();
-                 Statement stmt = conn.createStatement();
-                 ResultSet rs = stmt.executeQuery("SELECT * FROM dadospessoais")) {
-    
+            listaDadoPessoal.clear();// Limpa a lista de dados pessoais antes de carregar novos dados.
+            try (Connection conn = Database.getConnection(); // Estabelece a conexão com o banco de dados.
+                 Statement stmt = conn.createStatement(); // Cria um statement para executar a consulta.
+                 ResultSet rs = stmt.executeQuery("SELECT * FROM dadospessoais")) {// Executa a consulta SQL para selecionar todos os registros da tabela 'dadospessoais'.
+                 
+                // Processa cada linha retornada pela consulta e adiciona os dados na lista.
                 while (rs.next()) {
                     listaDadoPessoal.add(new DadoPessoal(rs.getInt("id"), rs.getString("nome_completo"), rs.getString("data_nascimento"), rs.getString("sexo"), rs.getString("estado_civil"), rs.getString("conjuge"), rs.getString("dependentes"), rs.getString("nacionalidade"), rs.getString("naturalidade"), rs.getString("cpf"), rs.getString("rg"), rs.getString("endereco"), rs.getString("telefone"), rs.getString("email"), rs.getString("filiacao"), rs.getString("tipo_sanguineo"), rs.getString("contato_emergencia")));
                 }
+                // Define a lista de dados pessoais como a fonte de dados para a tabela.
                 tableDadoPessoal.setItems(listaDadoPessoal);
             } catch (SQLException e) {
-
+                // Caso ocorra algum erro na consulta ou ao carregar os dados, exibe uma mensagem de erro.
                 mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao carregar funcionários: " + e.getMessage());
         }
     }
 
         private void carregarDadoProfissional() {
-                listaDadoProfissional.clear();
+                listaDadoProfissional.clear(); // Limpa a lista de dados profissionais antes de carregar novos dados.
                 try (Connection conn = Database.getConnection();
                     Statement stmt = conn.createStatement();
-                    ResultSet rs = stmt.executeQuery("SELECT dpf.idprof, dp.nome_completo,dpf.cargo, dpf.departamento, dpf.funcao, dpf.maquinas, dpf.admissao, dpf.salario, dpf.dadosbancarios, dpf.beneficios, dpf.escolaridade, dpf.ctps, dpf.pisPasep, dpf.contrato, dpf.horario, dpf.acidentes, dpf.advertencias, dpf.dados_pessoais FROM gestaofuncionarios.dadospessoais dp JOIN gestaofuncionarios.dadosprofissionais dpf ON dp.cpf = dpf.dados_pessoais")) {
-
+                    ResultSet rs = stmt.executeQuery("SELECT dpf.idprof, dp.nome_completo,dpf.cargo, dpf.departamento, dpf.funcao, dpf.maquinas, dpf.admissao, dpf.salario, dpf.dadosbancarios, dpf.beneficios, dpf.escolaridade, dpf.ctps, dpf.pisPasep, dpf.contrato, dpf.horario, dpf.acidentes, dpf.advertencias, dpf.dados_pessoais FROM Industria_db.dadospessoais dp JOIN Industria_db.dadosprofissionais dpf ON dp.cpf = dpf.dados_pessoais")) {
+  
+                    // Processa cada linha retornada pela consulta e adiciona os dados na lista.
                     while (rs.next()) {
                         listaDadoProfissional.add(new DadoProfissional (rs.getInt("idprof"), 
                                                                         rs.getString("nome_completo"),
@@ -746,17 +785,20 @@ public void atualizarDadoProfissional() {
                                                                         )
                                                     );
                     }
-                    tableDadoProfissional.setItems(listaDadoProfissional);
+                    // Define a lista de dados profissionais como a fonte de dados para a tabela.
+                    tableDadoProfissional.setItems(listaDadoProfissional); // Define a lista de dados profissionais como a fonte de dados para a tabela.
                 } catch (SQLException e) {
-
+                    // Caso ocorra algum erro na consulta ou ao carregar os dados, exibe uma mensagem de erro.
                     mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao carregar funcionários: " + e.getMessage());
             }
         }
 
         @FXML public void filtrarDadopessoal() {
-        FilteredList<DadoPessoal> dadosFiltrados = new FilteredList<>(listaDadoPessoal, p -> true);
+        // Cria uma lista filtrada a partir da lista original de dados pessoais.   
+        FilteredList<DadoPessoal> dadosFiltrados = new FilteredList<>(listaDadoPessoal, p -> true); // Cria uma lista filtrada a partir da lista original de dados pessoais.
 
         dadosFiltrados.setPredicate(dadopessoal -> {
+            // Checa se o nome do funcionário corresponde ao valor inserido no filtro.
             if (!filtroNomeFunc.getText().isEmpty() && !dadopessoal.getNome_completo().toLowerCase().contains(filtroNomeFunc.getText().toLowerCase())) {
                 return false;
             }
@@ -785,20 +827,24 @@ public void atualizarDadoProfissional() {
             if (filtroTipoSanguineoFunc.getValue() != null && !filtroTipoSanguineoFunc.getValue().isEmpty() && !dadopessoal.getTipo_sanguineo().toLowerCase().contains(filtroTipoSanguineoFunc.getValue().toLowerCase())) {
                 return false;
             }
-            
+            // Outros filtros semelhantes para as demais colunas.
             return true;
         });
-
+        // Define a lista filtrada como a fonte de dados para a tabela.
         tableDadoPessoal.setItems(dadosFiltrados);
     }
 
         @FXML
         public void filtrarDadoProfissional() {
+            // Cria uma lista filtrada a partir da lista original de dados profissionais.
             FilteredList<DadoProfissional> dadosFiltrados = new FilteredList<>(listaDadoProfissional, p -> true);
     
+            // Define o critério de filtragem com base nos campos de filtro preenchidos pelo usuário.
             dadosFiltrados.setPredicate(DadoProfissional -> {
+
+                // Verifica se o campo de cargo está preenchido e se o cargo do item atual contém o valor filtrado.
                 if (!filtrocargo.getText().isEmpty() && !DadoProfissional.getCargo().toLowerCase().contains(filtrocargo.getText().toLowerCase())) {
-                    return false;
+                    return false; // Se não contiver, o item é descartado da lista.
                 }
                 if (filtrodepartamento.getValue() != null && !filtrodepartamento.getValue().isEmpty() && !DadoProfissional.getDepartamento().toLowerCase().contains(filtrodepartamento.getValue().toLowerCase())) {
                     return false;
@@ -828,13 +874,15 @@ public void atualizarDadoProfissional() {
 
                }             
     
+                // Se passou por todos os filtros, o item será incluído na tabela.
                 return true;
             });
     
+            // Atualiza a tabela com os dados filtrados.
             tableDadoProfissional.setItems(dadosFiltrados);
         }
 
-    
+    // Limpa os filtros de texto e seleção.
     @FXML
     public void limparFiltro() {
         filtroNomeFunc.clear();
@@ -860,45 +908,60 @@ public void atualizarDadoProfissional() {
         filtroacidentes.clear();
        
 
-        tableDadoProfissional.setItems(listaDadoProfissional);
+        tableDadoProfissional.setItems(listaDadoProfissional);   // Limpa os filtros para os dados profissionais também.
     }
     
     @FXML
     public void excluirAtualizar(){
+        // Obtém os itens selecionados nas tabelas de dados pessoais e profissionais.
         DadoPessoal dadoPessoalSelecionado = tableDadoPessoal.getSelectionModel().getSelectedItem();
         DadoProfissional dadoProfissionalSelecionado = tableDadoProfissional.getSelectionModel().getSelectedItem();
+        
+        // Verifica se ambos os registros foram selecionados antes de excluir
         if (dadoPessoalSelecionado != null && dadoProfissionalSelecionado != null ) {
+
+            // Primeira Conexão e statement para deletar os dados profissionais executando comandos SQL dentro do seu banco de dados.
             try (Connection conn_1 = Database.getConnection();
             PreparedStatement stmt_1 = conn_1.prepareStatement("DELETE FROM dadosprofissionais WHERE dados_pessoais = ?");
+            
+            // Segunda Conexão e statement para deletar os dados pessoais executando comandos SQL dentro do seu banco de dados.
             Connection conn = Database.getConnection();
-                 PreparedStatement stmt = conn.prepareStatement("DELETE FROM dadospessoais WHERE cpf = ?");
-                 ) {
-                
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM dadospessoais WHERE cpf = ?");
+             ) {
+
+                // Define o valor do parâmetro para deletar dados profissionais com base no CPF vinculado.
                 stmt_1.setString(1, dadoProfissionalSelecionado.getDados_pessoais());
-                stmt_1.executeUpdate();
+                stmt_1.executeUpdate(); // Executa a exclusão dos dados profissionais.
 
+                // Define o valor do parâmetro para deletar dados pessoais com base no CPF.
                 stmt.setString(1, dadoPessoalSelecionado.getCpf());
-                stmt.executeUpdate();
+                stmt.executeUpdate(); // Executa a exclusão dos dados pessoais.
 
+                // Recarrega os dados na interface após a exclusão.
                 carregarDadoPessoal();
                 carregarDadoProfissional();
+
+                // Exibe uma mensagem informando que a exclusão foi bem-sucedida.
                 mostrarAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Funcionário excluído com sucesso!");   
                 }catch (SQLException e) {
+
+                // Caso ocorra erro na exclusão, exibe mensagem de erro ao usuário.
                 mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao excluir funcionário: " + e.getMessage());
                 }
         } else {
+            // Se nenhum funcionário estiver selecionado, exibe alerta para o usuário.
             mostrarAlerta(Alert.AlertType.WARNING, "Atenção", "Selecione um funcionário para excluir!");
         }
-        limparCamposAtualizacao();
+        limparCamposAtualizacao(); // Após a exclusão, limpa os campos da aba de atualização.
     }
 
-
+    // Método utilitário para exibir alertas na tela com diferentes tipos de mensagens.
     private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensagem) {
         Alert alerta = new Alert(tipo);
-        alerta.setTitle(titulo);
-        alerta.setHeaderText(null);
-        alerta.setContentText(mensagem);
-        alerta.showAndWait();;
+        alerta.setTitle(titulo); // Define o título da janela de alerta.
+        alerta.setHeaderText(null); // Remove o cabeçalho.
+        alerta.setContentText(mensagem); // Define o texto da mensagem.
+        alerta.showAndWait();; // Exibe o alerta e espera o usuário fechar.
     }
 }
 
