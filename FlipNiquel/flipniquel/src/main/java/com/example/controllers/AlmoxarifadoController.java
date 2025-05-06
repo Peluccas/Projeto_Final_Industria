@@ -180,7 +180,7 @@ public void atualizarprodutos() {
     //conexão com o banco
     try (Connection conn = Database.getConnection();
     //update do banco de dados
-         PreparedStatement stmt = conn.prepareStatement("UPDATE estoque SET nome = ?, quantidade = ?, marca = ?, fornecedor = ?, localizacao = ?, codigo = ?, preco_de_custo = ?, categoria = ?,   WHERE id = ?")) {
+         PreparedStatement stmt = conn.prepareStatement("UPDATE estoque SET nome = ?, quantidade = ?, marca = ?, fornecedor = ?, localizacao = ?, codigo = ?, preco_de_custo = ?, categoria = ?  WHERE id = ?")) {
         stmt.setString(1, nome );
         stmt.setString (2,  quantidade);
         stmt.setString(3, marca);
