@@ -115,9 +115,8 @@ public class QProdutoController {
         
     }
 
-    public void setQFuncionarioController(QFuncionarioController funcionarioController) {
-        this.qfuncionarioController = funcionarioController;
-    }
+    
+    //
 
     
     
@@ -249,6 +248,11 @@ public class QProdutoController {
             mostrarAlerta(Alert.AlertType.WARNING, "Aviso", "Nenhum produto selecionado!");
             return;
         }
+        if (!checkSelo.isSelected()) {
+             mostrarAlerta(Alert.AlertType.WARNING, "Aviso", "Aprovação dever possuir o Selo de Qualidade!");
+             mostrarAlerta(Alert.AlertType.WARNING, "Aviso", "O Lote deve passar pelo Teste de Qualidade!");
+             return;
+        }
         if (auditorSelecionado == null || auditorSelecionado.isEmpty()) {
             mostrarAlerta(Alert.AlertType.WARNING, "Aviso", "Selecione um auditor!");
             return;
@@ -292,6 +296,8 @@ public class QProdutoController {
                 tableConferenciaRevisao();
                 listaProducao.clear();
                 mostrarAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Produto sendo revisado - salvo com sucesso!");
+
+                deletarbtnProducaoAprovados();
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -363,6 +369,8 @@ public class QProdutoController {
 
                         tableConferenciaRevisao();
                         diminuirAbril();
+
+                        deletarbtnProducaoAprovados();
                     
                     mostrarAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Produto recusado salvo com sucesso!");
                 } catch (SQLException e) {

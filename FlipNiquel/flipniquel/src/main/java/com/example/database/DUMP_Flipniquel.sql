@@ -195,6 +195,7 @@ CREATE TABLE usuarioQA(
     senha VARCHAR(100) NOT NULL
 );
 
+INSERT INTO usuarioQA(usuario, senha) VALUES ('fiscal', '777');
 
 
 CREATE TABLE tableDash (

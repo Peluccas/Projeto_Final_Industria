@@ -69,6 +69,7 @@ public class QFuncionarioController {
         chartBar1();
         chartLine();
         ChartPie();
+        tableDashTela.setDisable(true);
     }
 
     
@@ -203,40 +204,12 @@ public class QFuncionarioController {
   
     @FXML
     public void btnDashLote(){
-        btnDash.setDisable(true);
-        progressIndica.setProgress(-1);
-        new Thread(() -> {
-            for (int i = 0; i <= 100; i++) {
-                final double progress = i / 100.0; 
-                Platform.runLater(() -> progressBar.setProgress(progress));
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            
-            Platform.runLater(() -> btnDash.setDisable(false));
-        }).start();
-
-        new Thread(() -> {
-            for (int i = 0; i <= 100; i++) {
-                try {
-                    Thread.sleep(50); 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            Platform.runLater(() -> {
-                btnDash.setDisable(false);
-                progressIndica.setProgress(1); 
-            });
-        }).start();
-
+        //
         
         chartBar();
         chartBar1();
         chartLine();
+        ChartPie();
         carregarDadosDash();
         
   

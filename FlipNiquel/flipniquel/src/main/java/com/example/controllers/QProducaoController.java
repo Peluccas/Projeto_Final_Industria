@@ -58,9 +58,9 @@ public class QProducaoController {
         LocalDate datalote = dateLote.getValue();
         pacSedex = Arrays.asList(pac, sedex);
 
-        if (nomeCliente == null) {
-            mostrarAlerta(Alert.AlertType.WARNING, "Aviso", "Nenhum Nome de Cliente Encontrado!");
-            return;
+        if (nomecliente.isEmpty()) {
+             mostrarAlerta(Alert.AlertType.WARNING, "Aviso", "Nenhum Nome de Cliente Encontrado!");
+             return;
         }
         if (produtoSelecionado == null) {
             mostrarAlerta(Alert.AlertType.WARNING, "Aviso", "Nenhum produto selecionado!");
