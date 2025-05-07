@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.example.database.Database;
-import com.example.models.Funcionario;
 import com.example.models.QFuncionario;
+
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;

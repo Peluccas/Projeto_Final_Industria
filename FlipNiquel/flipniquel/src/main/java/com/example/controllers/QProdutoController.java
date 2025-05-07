@@ -10,11 +10,11 @@ import java.sql.Statement;
 import java.time.LocalDate;
 
 import com.example.database.Database;
-import com.example.models.Produto;
+import com.example.models.QProduto;
 import com.example.models.ProdutoConferido;
 import com.example.models.ProdutoProducao;
 import com.example.models.ProdutoReprovado;
-import com.example.models.QProduto;
+
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -508,7 +508,10 @@ public class QProdutoController {
 
                         
                         aumentarAbril();
-                        
+                        tableConferenciaConferidos();
+                        tableConferenciaRevisao();
+                        listaConferencia.clear();
+                        btnAprovarRevisao.setDisable(false);
 
                         mostrarAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Produto revisado salvo com sucesso!");
 
@@ -520,10 +523,9 @@ public class QProdutoController {
                 mostrarAlerta(Alert.AlertType.INFORMATION, "Cancelado", "Aprovação cancelada.");
                 }
             });
-                btnAprovarRevisao.setDisable(false);
-                resetarTabela();
-                tableConferenciaRevisao();
-                listaConferencia.clear();
+               
+                
+            
             
         }
 
