@@ -294,7 +294,7 @@ public class QProdutoController {
                 stmt.executeUpdate();
 
                 tableConferenciaRevisao();
-                listaProducao.clear();
+                
                 mostrarAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Produto sendo revisado - salvo com sucesso!");
 
                 deletarbtnProducaoAprovados();
@@ -322,6 +322,7 @@ public class QProdutoController {
 
         if (produtoSelecionado == null) {
             mostrarAlerta(Alert.AlertType.WARNING, "Aviso", "Nenhum produto selecionado!");
+            mostrarAlerta(Alert.AlertType.WARNING, "Aviso", "O Teste é necessario para Comfirmar a Reprovação!");
             return;
         }
         if (auditorSelecionado == null || auditorSelecionado.isEmpty()) {
@@ -388,10 +389,7 @@ public class QProdutoController {
     private String statusConferido() {
         return "Verificado";
     }
-    public void resetarTabela() {
-        btnAprovarRevisaoAct(); 
-    }
-
+    
     public void contadorAprovadosDash(){
         try {Connection conn = Database.getConnection();
             PreparedStatement tableDash = conn.prepareStatement("UPDATE tableDash SET aprovados = aprovados + 1 WHERE id = 1");
@@ -509,8 +507,8 @@ public class QProdutoController {
                         
                         aumentarAbril();
                         tableConferenciaConferidos();
-                        tableConferenciaRevisao();
-                        listaConferencia.clear();
+                    
+                        
                         btnAprovarRevisao.setDisable(false);
 
                         mostrarAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Produto revisado salvo com sucesso!");
