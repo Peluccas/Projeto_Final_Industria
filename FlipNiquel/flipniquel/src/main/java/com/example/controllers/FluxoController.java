@@ -538,6 +538,7 @@ public class FluxoController {
        
            } catch (SQLException e) {
                e.printStackTrace();
+               mostrarAlerta(Alert.AlertType.ERROR, "Erro!", "Erro no banco de dados!"+ e.getMessage());
            }
        }
        
@@ -581,6 +582,7 @@ public class FluxoController {
         
         } catch (SQLException e) {
             e.printStackTrace();
+            mostrarAlerta(Alert.AlertType.ERROR, "Erro!", "Erro no banco de dados!"+ e.getMessage());
         }
        }
 
