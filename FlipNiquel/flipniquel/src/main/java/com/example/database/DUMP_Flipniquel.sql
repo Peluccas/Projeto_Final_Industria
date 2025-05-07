@@ -275,11 +275,11 @@ INSERT INTO barChart1 (mes, quantidade) VALUES('Jan', 1),('Feb', 2),('Mar', 1),(
 
 INSERT INTO usuarioQA(usuario, senha) VALUES ('fiscal', '777');
 
-INSERT INTO tableProducao (id, descricao, status, produtos, lote, chegada) VALUES(1,'15Und','Producao','Plava V1',75,"2025-05-07");
-INSERT INTO tableProducao (id, descricao, status, produtos, lote, chegada) VALUES(2,'14Und','Producao','Plava V2',76,"2025-05-07";
-INSERT INTO tableProducao (id, descricao, status, produtos, lote, chegada) VALUES(3,'17Und','Producao','Plava V3',77,"2025-05-07");
-INSERT INTO tableProducao (id, descricao, status, produtos, lote, chegada) VALUES(4,'11Und','Producao','Plava V4',78,"2025-05-07");
-INSERT INTO tableProducao (id, descricao, status, produtos, lote, chegada) VALUES(5,'12Und','Producao','Plava V5',79,"2025-05-07");
+INSERT INTO tableProducao (id, descricao, status, produtos, lote, chegada) VALUES(1,'15Und','Producao','Plava V1',75,'2025-05-07');
+INSERT INTO tableProducao (id, descricao, status, produtos, lote, chegada) VALUES(2,'14Und','Producao','Plava V2',76,'2025-05-07';
+INSERT INTO tableProducao (id, descricao, status, produtos, lote, chegada) VALUES(3,'17Und','Producao','Plava V3',77,'2025-05-07');
+INSERT INTO tableProducao (id, descricao, status, produtos, lote, chegada) VALUES(4,'11Und','Producao','Plava V4',78,'2025-05-07');
+INSERT INTO tableProducao (id, descricao, status, produtos, lote, chegada) VALUES(5,'12Und','Producao','Plava V5',79,'2025-05-07');
 
 
 
