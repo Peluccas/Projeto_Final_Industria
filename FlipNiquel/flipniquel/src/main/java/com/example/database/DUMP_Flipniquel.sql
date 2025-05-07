@@ -286,6 +286,8 @@ INSERT INTO tableProducao (id, descricao, status, produtos, lote, chegada) VALUE
 
 
 
+
+
 CREATE TABLE usuarioAutomacao(
     id SERIAL PRIMARY KEY NOT NULL,
     usuario VARCHAR(100) NOT NULL,
